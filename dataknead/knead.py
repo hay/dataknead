@@ -3,7 +3,7 @@ from pathlib import Path
 
 class Knead:
     SUPPORTED_TYPES = ("csv", "json")
-    _type = None
+    _filetype = None
     _data = None
 
     def __init__(self, inp, filetype = None, is_data = False):
@@ -12,14 +12,13 @@ class Knead:
             # If we have a filetype forced, use that, otherwise get it from
             # the file extension
             if filetype:
-                self._type = filetype
+                self._filetype = filetype
             else:
-                self._type = self._get_filetype(inp)
+                self._filetype = self._get_filetype(inp)
 
             self._load(inp)
         else:
             # We assume this is data, assign it
-            self._type = type(inp).__name__
             self._data = inp
 
     def __str__(self):
@@ -43,9 +42,9 @@ class Knead:
 
     def _load(self, pathstr):
         with open(pathstr) as f:
-            if self._type == "json":
+            if self._filetype == "json":
                 self._data = json.loads(f.read())
-            elif self._type == "csv":
+            elif self._filetype == "csv":
                 reader = csv.DictReader(f)
                 self._data = [row for row in reader]
 
