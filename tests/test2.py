@@ -7,7 +7,7 @@ from dataknead import Knead
 
 data = Knead("data/entity.json").data()
 Knead(data).write("data/entity.json", indent = 4)
-Knead(data).query("response/Q2092563/image/full").print()
+print(Knead(data).query("response/Q2092563/image/full"))
 
 claims = []
 for claim in Knead(data).query("response/Q2092563/claims/"):
@@ -15,8 +15,12 @@ for claim in Knead(data).query("response/Q2092563/claims/"):
 
 Knead(claims).write("data/entity.csv")
 
-def mutate(row):
+def mapfn(row):
     row["property_descriptions"] = row["property_descriptions"].upper()
     return row
 
-Knead("data/entity.csv").map(mutate).write("data/entity-mutated.csv")
+def filterfn(row):
+    return "located" in row["property_labels"]
+
+Knead("data/entity.csv").map(mapfn).write("data/entity-mapped.csv")
+Knead("data/entity.csv").filter(filterfn).write("data/entity-filtered.csv")

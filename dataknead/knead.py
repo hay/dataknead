@@ -7,6 +7,10 @@ class Knead:
     data = None
 
     def __init__(self, inp, filetype = None):
+        """
+        print()
+        print("INP: %s" % inp)
+        """
         if isinstance(inp, str):
             # We assume this is a path, load the data
             # If we have a filetype forced, use that, otherwise get it from
@@ -38,9 +42,6 @@ class Knead:
                 reader = csv.DictReader(f)
                 self._data = [row for row in reader]
 
-    def data(self):
-        return self._data
-
     def _write_csv(self, path, fieldnames = None):
         data = self.data()
 
@@ -60,6 +61,39 @@ class Knead:
         with open(path, "w") as f:
             jsondata = json.dumps(self.data(), indent = indent)
             f.write(jsondata)
+
+    def data(self):
+        return self._data
+
+    def filter(self, fn):
+        data = [row for row in self.data() if fn(row)]
+        return Knead(data)
+
+    def map(self, fn):
+        data = [fn(row) for row in self.data()]
+        return Knead(data)
+
+    def print(self, indent = 4):
+        data = json.dumps(self.data(), indent = indent)
+        print(data)
+
+    def query(self, path, default = None):
+        keys = path.split("/")
+        val = default
+
+        for key in keys:
+            if val:
+                if not key or isinstance(val, list):
+                    break
+                else:
+                    val = val.get(key, default)
+            else:
+                val = self.data().get(key, default)
+
+            if not val:
+                break;
+
+        return val
 
     def write(self, path, indent = None, fieldnames = None):
         filetype = self._get_filetype(path)
