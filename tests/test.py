@@ -3,22 +3,24 @@ from time import time
 from statistics import mean
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from dataknead import print_json, read_json, write_json, DictQuery, write_csvdict, map_csv
+from dataknead import Knead
 
-data = read_json("data/entity.json")
-write_json("data/entity.json", data, indent = 4)
-dq = DictQuery(data)
-
-print_json(dq.get("response/Q2092563/image/full"))
+data = Knead("data/entity.json").data()
+Knead(data).write("data/entity.json", indent = 4)
+print(Knead(data).query("response/Q2092563/image/full"))
 
 claims = []
-for claim in dq.get("response/Q2092563/claims/"):
+for claim in Knead(data).query("response/Q2092563/claims/"):
     claims.append({ k:v for k,v in claim.items() if isinstance(v, str)})
 
-write_csvdict("data/entity.csv", claims)
+Knead(claims).write("data/entity.csv")
 
-def mutate(row):
+def mapfn(row):
     row["property_descriptions"] = row["property_descriptions"].upper()
     return row
 
-mutate_csv("data/entity.csv", "data/entity-mutated.csv", mutate)
+def filterfn(row):
+    return "located" in row["property_labels"]
+
+Knead("data/entity.csv").map(mapfn).write("data/entity-mapped.csv")
+Knead("data/entity.csv").filter(filterfn).write("data/entity-filtered.csv")
