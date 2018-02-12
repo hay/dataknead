@@ -32,14 +32,6 @@ class Knead:
         else:
             return filetype
 
-    def _is_tabular(self):
-        data = self.data()
-
-        if not isinstance(data, list):
-            return False
-
-        return all([isinstance(val, dict) for val in data])
-
     def _load(self, pathstr):
         with open(pathstr) as f:
             if self._filetype == "json":
@@ -51,7 +43,7 @@ class Knead:
     def _write_csv(self, path, fieldnames = None):
         data = self.data()
 
-        if self._is_tabular():
+        if all([isinstance(i, dict) for i in data]):
             # First extract all the fieldnames from the list
             if not fieldnames:
                 fieldnames = set()
@@ -63,13 +55,18 @@ class Knead:
                 writer = csv.DictWriter(f, fieldnames = fieldnames)
                 writer.writeheader()
                 [writer.writerow(row) for row in data]
+        elif all([isinstance(i, list) for i in data]):
+            # A list with lists
+            with open(path, "w") as f:
+                writer = csv.writer(f)
+                [writer.writerow(row) for row in data]
         elif isinstance(data, list):
-            # Assume this is a 'simple' list
+            # Just one single column
             with open(path, "w") as f:
                 writer = csv.writer(f)
                 [writer.writerow([row]) for row in data]
         else:
-            raise TypeError("Can't write type '%s' to csv" % data.__name__)
+            raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
 
     def _write_json(self, path, indent = None):
         with open(path, "w") as f:
@@ -95,23 +92,30 @@ class Knead:
         data = [fn(row) for row in self.data(check_instance = list)]
         return Knead(data)
 
+    def print(self):
+        print(self)
+
     def query(self, path, default = None):
+        data = self.data(check_instance = dict)
         keys = path.split("/")
-        val = default
+        val = data.get(keys.pop(0), default)
 
         for key in keys:
-            if val:
-                if not key or isinstance(val, list):
-                    break
-                else:
-                    val = val.get(key, default)
+            if isinstance(val, dict):
+                val = val.get(key, default)
             else:
-                val = self.data().get(key, default)
-
-            if not val:
-                break;
+                val = default
+                break
 
         return Knead(val, is_data = True)
+
+    def transform(self, fn):
+        """
+        Runs a function over the data
+        """
+        self._data = fn(self.data())
+        return self
+
 
     def write(self, path, filetype = None, indent = None, fieldnames = None):
         if not filetype:
