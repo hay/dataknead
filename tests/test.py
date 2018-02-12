@@ -12,19 +12,18 @@ print(Knead(data).query("response/Q2092563/image/full").data())
 def get_claimstring(claim):
     return { k:v for k,v in claim.items() if isinstance(v, str)}
 
+def get_claimimage(claim):
+    val = claim["values"][0]
+
+    return {
+        "image" : Knead(val).query("image/full").data(),
+        "id" : claim["property_id"]
+    }
+
 claims = Knead(data).query("response/Q2092563/claims/")
 claims.write("data/claims.json")
 claims.map(get_claimstring).write("data/entity.csv")
-
-"""
-claims = Knead(data).query("response/Q2092563/claims/")
-
-myclaims = []
-for claim in claims.data():
-    myclaims.append({ k:v for k,v in claim.items() if isinstance(v, str)})
-
-Knead(myclaims).write("data/entity.csv")
-"""
+claims.map(get_claimimage).write("data/entity-images.csv")
 
 Knead("data/entity.csv")\
     .filter(lambda row:"located" in row["property_labels"])\

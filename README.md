@@ -50,4 +50,8 @@ Venice,it,265000
 
 ## Caveats
 * `dataknead` only supports CSV and JSON
-*
+* The only format writable to CSV and JSON is a `dict` or a `list` with `dict` structures. If you only have a list, use `map` to add a key to it, like this:
+
+```python
+Knead([1,2,3]).map(lambda i:{ "number" : i }).write("numbers.csv")
+```

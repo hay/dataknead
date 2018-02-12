@@ -30,6 +30,14 @@ class Knead:
         else:
             return filetype
 
+    def _is_tabular(self):
+        data = self.data()
+
+        if not isinstance(data, list):
+            return False
+
+        return all([isinstance(val, dict) for val in data])
+
     def _load(self, pathstr):
         with open(pathstr) as f:
             if self._type == "json":
@@ -39,6 +47,9 @@ class Knead:
                 self._data = [row for row in reader]
 
     def _write_csv(self, path, fieldnames = None):
+        if not self._is_tabular():
+            raise Exception("Data is not a list with dict objects")
+
         data = self.data()
 
         # First extract all the fieldnames from the list
