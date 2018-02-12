@@ -59,11 +59,19 @@ class Knead:
             # A list with lists
             with open(path, "w") as f:
                 writer = csv.writer(f)
+
+                if fieldnames:
+                    writer.writerow(fieldnames)
+
                 [writer.writerow(row) for row in data]
         elif isinstance(data, list):
             # Just one single column
             with open(path, "w") as f:
                 writer = csv.writer(f)
+
+                if fieldnames:
+                    writer.writerow(fieldnames)
+
                 [writer.writerow([row]) for row in data]
         else:
             raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
@@ -88,8 +96,18 @@ class Knead:
         data = [row for row in self.data(check_instance = list) if fn(row)]
         return Knead(data)
 
-    def map(self, fn):
-        data = [fn(row) for row in self.data(check_instance = list)]
+    def map(self, iteratee):
+        data = self.data(check_instance = list)
+
+        # If 'iteratee' is a function, map over the data
+        if callable(iteratee):
+            data = [iteratee(row) for row in data]
+        elif isinstance(iteratee, str):
+            # Shortcut, like 'pluck'
+            data = [row[iteratee] for row in data]
+        else:
+            raise TypeError("Iteratee should be of type dict or function")
+
         return Knead(data)
 
     def print(self):
@@ -122,6 +140,6 @@ class Knead:
             filetype = self._get_filetype(path)
 
         if filetype == "json":
-            self._write_json(path, indent)
+            self._write_json(path, indent = indent)
         elif filetype == "csv":
-            self._write_csv(path, fieldnames)
+            self._write_csv(path, fieldnames = fieldnames)

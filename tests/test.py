@@ -15,17 +15,32 @@ entity.write("output/entity.json", indent = 4)
 # Print the description using query()
 print(entity.query("entities/Q184843/descriptions/en/value"))
 
-entity\
-    .query("entities/Q184843/sitelinks")\
-    .transform(lambda d:list(d.values()))\
-    .map(lambda d:[d["site"], d["title"]])\
-    .write("output/sitelinks.csv")
+# Get all the sitelinks and show the three different ways we can write
+# this to a csv file.
+# First get the sitelinks as a list using 'transform'
+sitelinks = entity.query("entities/Q184843/sitelinks").transform(lambda d:list(d.values()))
 
-# Get claims
-claims = entity.query("entities/Q184843/claims")
+# First write it as a list with dicts, adding a header
+sitelinks.write("output/sitelinks-header.csv")
 
-# Write claims, indented with 4 spaces
-claims.write("output/claims.json", indent = 4)
+# Then write it as a list with two columns, only containing site and title
+# and manually added fieldnames
+sitelinks.map(lambda d:[d["site"], d["title"]]).write("output/sitelinks-twocol.csv", fieldnames=["site", "title"])
+
+# Note that this is the same thing as writing
+sitelinks.map(lambda d:{"site" : d["site"], "title" : d["title"]}).write("output/sitelinks-twocol.csv")
+
+# And finally as a single list, with just the titles
+sitelinks.map(lambda d:d["title"]).write("output/sitelinks-single.csv")
+
+# And wait, we can even do this:
+sitelinks.map("title").write("output/sitelinks-single.csv")
+
+# Let's also make a list of all titles that are not 'Blade Runner'
+sitelinks.map("title").filter(lambda t:t != "Blade Runner").write("output/sitelinks-other-title.csv")
+
+# Here's a pretty complex example, showing off all the different methods
+# First define two helper functions we are going to be using
 
 def propvalue(claim):
     claim = Knead(claim)
@@ -39,28 +54,5 @@ def transform(claims):
     values = chain.from_iterable(claims.values())
     return [propvalue(c) for c in list(values)]
 
-# Flatten claims and write to csv
-claims.transform(transform).write("output/claims.csv")
-
-"""
-def get_claimstring(claim):
-    return { k:v for k,v in claim.items() if isinstance(v, str)}
-
-def get_claimvalue(claim):
-    return claim["values"][0]["value"]
-
-claims = entity.query("response/Q2092563/claims/")
-claims.write("output/claims.json")
-claims.map(get_claimstring).write("output/entity.csv")
-claims.map(get_claimvalue).write("output/entity-values.csv")
-
-Knead("output/entity.csv")\
-    .filter(lambda row:"located" in row["property_labels"])\
-    .write("output/entity-filtered.csv")
-
-def mapfn(row):
-    row["property_descriptions"] = row["property_descriptions"].upper()
-    return row
-
-Knead("output/entity.csv").map(mapfn).write("output/entity-mapped.csv")
-"""
+# Finally, query claims, flatten them and write to csv
+entity.query("entities/Q184843/claims").transform(transform).write("output/claims.csv")
