@@ -1,198 +1,198 @@
 {
-    "command": "wikidata",
     "chantek": "0.6.4",
+    "error": false,
+    "command": "wikidata",
     "params": {
         "q": "Q2092563"
     },
     "response": {
         "Q2092563": {
+            "descriptions": null,
+            "labels": null,
+            "aliases": null,
             "sitelinks": {},
             "image": {
-                "full": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg",
-                "thumb": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg?width=300"
+                "thumb": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg?width=300",
+                "full": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg"
             },
-            "labels": null,
-            "descriptions": null,
+            "id": "Q2092563",
             "claims": [
                 {
+                    "property_descriptions": "sovereign state of this item, don't use on humans",
+                    "property_id": "P17",
                     "values": [
                         {
-                            "datatype": "wikibase-item",
-                            "value_labels": "Netherlands",
-                            "value_string": "Netherlands",
                             "value": "Q55",
-                            "value_descriptions": "constituent country of the Kingdom of the Netherlands in Europe"
+                            "value_string": "Netherlands",
+                            "value_labels": "Netherlands",
+                            "value_descriptions": "constituent country of the Kingdom of the Netherlands in Europe",
+                            "datatype": "wikibase-item"
                         }
                     ],
-                    "property_descriptions": "sovereign state of this item, don't use on humans",
-                    "property_labels": "country",
-                    "property_id": "P17"
+                    "property_labels": "country"
                 },
                 {
+                    "property_descriptions": "image of relevant illustration of the subject; if available, use more specific properties (sample: coat of arms image, locator map, flag image, signature image, logo image, collage image); only images which exist on Wikimedia Commons are acceptable",
+                    "property_id": "P18",
                     "values": [
                         {
-                            "datatype": "commonsMedia",
+                            "value": "Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg",
                             "image": {
-                                "full": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg",
-                                "thumb": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg?width=300"
+                                "thumb": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg?width=300",
+                                "full": "http://commons.wikimedia.org/wiki/Special:Redirect/file/Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg"
                             },
                             "value_string": "http://commons.wikimedia.org/wiki/File:Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg",
-                            "value": "Cin\u00e9tol - Amsterdam - 20021152 - RCE.jpg"
+                            "datatype": "commonsMedia"
                         }
                     ],
-                    "property_descriptions": "image of relevant illustration of the subject; if available, use more specific properties (sample: coat of arms image, locator map, flag image, signature image, logo image, collage image); only images which exist on Wikimedia Commons are acceptable",
-                    "property_labels": "image",
-                    "property_id": "P18"
+                    "property_labels": "image"
                 },
                 {
+                    "property_descriptions": "that class of which this subject is a particular example and member. (Subject typically an individual member with Proper Name label.) Different from P279 (subclass of)",
+                    "property_id": "P31",
                     "values": [
                         {
-                            "datatype": "wikibase-item",
-                            "value_labels": "movie theater",
-                            "value_string": "movie theater",
                             "value": "Q41253",
-                            "value_descriptions": "venue, usually a building, for viewing films"
+                            "value_string": "movie theater",
+                            "value_labels": "movie theater",
+                            "value_descriptions": "venue, usually a building, for viewing films",
+                            "datatype": "wikibase-item"
                         },
                         {
-                            "datatype": "wikibase-item",
-                            "value_labels": "library",
-                            "value_string": "library",
                             "value": "Q7075",
-                            "value_descriptions": "organized collection of resources"
+                            "value_string": "library",
+                            "value_labels": "library",
+                            "value_descriptions": "organized collection of resources",
+                            "datatype": "wikibase-item"
                         }
                     ],
-                    "property_descriptions": "that class of which this subject is a particular example and member. (Subject typically an individual member with Proper Name label.) Different from P279 (subclass of)",
-                    "property_labels": "instance of",
-                    "property_id": "P31"
+                    "property_labels": "instance of"
                 },
                 {
-                    "values": [
-                        {
-                            "datatype": "wikibase-item",
-                            "value_labels": "Leendert van der Vlugt",
-                            "value_string": "Leendert van der Vlugt",
-                            "value": "Q1812135",
-                            "value_descriptions": "Dutch architect"
-                        }
-                    ],
                     "property_descriptions": "person or architectural firm that designed this building",
-                    "property_labels": "architect",
-                    "property_id": "P84"
-                },
-                {
+                    "property_id": "P84",
                     "values": [
                         {
-                            "datatype": "wikibase-item",
-                            "value_labels": "Amsterdam",
-                            "value_string": "Amsterdam",
-                            "value": "Q9899",
-                            "value_descriptions": "municipality in the Netherlands, containing the city of Amsterdam"
+                            "value": "Q1812135",
+                            "value_string": "Leendert van der Vlugt",
+                            "value_labels": "Leendert van der Vlugt",
+                            "value_descriptions": "Dutch architect",
+                            "datatype": "wikibase-item"
                         }
                     ],
+                    "property_labels": "architect"
+                },
+                {
                     "property_descriptions": "the item is located on the territory of the following administrative entity. Use P276 (location) for specifying the location of non-administrative places and for items about events",
-                    "property_labels": "located in the administrative territorial entity",
-                    "property_id": "P131"
-                },
-                {
+                    "property_id": "P131",
                     "values": [
                         {
-                            "datatype": "wikibase-item",
-                            "value_labels": "Amsterdam-Zuid",
-                            "value_string": "Amsterdam-Zuid",
-                            "value": "Q478636",
-                            "value_descriptions": "one of seven boroughs of Amsterdam"
+                            "value": "Q9899",
+                            "value_string": "Amsterdam",
+                            "value_labels": "Amsterdam",
+                            "value_descriptions": "municipality in the Netherlands, containing the city of Amsterdam",
+                            "datatype": "wikibase-item"
                         }
                     ],
+                    "property_labels": "located in the administrative territorial entity"
+                },
+                {
                     "property_descriptions": "location of the item, physical object or event is within. In case of an administrative entity use P131. In case of a distinct terrain feature use P706.",
-                    "property_labels": "location",
-                    "property_id": "P276"
-                },
-                {
+                    "property_id": "P276",
                     "values": [
                         {
-                            "datatype": "external-id",
-                            "value_string": "",
-                            "value": "5737"
+                            "value": "Q478636",
+                            "value_string": "Amsterdam-Zuid",
+                            "value_labels": "Amsterdam-Zuid",
+                            "value_descriptions": "one of seven boroughs of Amsterdam",
+                            "datatype": "wikibase-item"
                         }
                     ],
+                    "property_labels": "location"
+                },
+                {
                     "property_descriptions": "identifier for a monument assigned by the Rijksdienst voor het Cultureel Erfgoed",
-                    "property_labels": "Rijksmonument ID",
-                    "property_id": "P359"
-                },
-                {
+                    "property_id": "P359",
                     "values": [
                         {
-                            "datatype": "string",
-                            "value_string": "Cinetol",
-                            "value": "Cinetol"
+                            "value": "5737",
+                            "value_string": "",
+                            "datatype": "external-id"
                         }
                     ],
-                    "property_descriptions": "name of the Wikimedia Commons category containing files related to this item (without the prefix \"Category:\")",
-                    "property_labels": "Commons category",
-                    "property_id": "P373"
+                    "property_labels": "Rijksmonument ID"
                 },
                 {
+                    "property_descriptions": "name of the Wikimedia Commons category containing files related to this item (without the prefix \"Category:\")",
+                    "property_id": "P373",
                     "values": [
                         {
-                            "datatype": "globe-coordinate",
-                            "value_string": "52.35256,4.90621",
+                            "value": "Cinetol",
+                            "value_string": "Cinetol",
+                            "datatype": "string"
+                        }
+                    ],
+                    "property_labels": "Commons category"
+                },
+                {
+                    "property_descriptions": "geocoordinates of the subject, please note that only WGS84 coordinating system is supported at the moment",
+                    "property_id": "P625",
+                    "values": [
+                        {
                             "value": {
+                                "globe": "http://www.wikidata.org/entity/Q2",
                                 "latitude": 52.35256,
                                 "altitude": null,
-                                "globe": "http://www.wikidata.org/entity/Q2",
-                                "longitude": 4.90621,
-                                "precision": 0.0014707168880056
-                            }
+                                "precision": 0.0014707168880056,
+                                "longitude": 4.90621
+                            },
+                            "value_string": "52.35256,4.90621",
+                            "datatype": "globe-coordinate"
                         }
                     ],
-                    "property_descriptions": "geocoordinates of the subject, please note that only WGS84 coordinating system is supported at the moment",
-                    "property_labels": "coordinate location",
-                    "property_id": "P625"
+                    "property_labels": "coordinate location"
                 },
                 {
-                    "values": [
-                        {
-                            "datatype": "wikibase-item",
-                            "value_labels": "Tolstraat",
-                            "value_string": "Tolstraat",
-                            "value": "Q2361754",
-                            "value_descriptions": "street in Amsterdam"
-                        }
-                    ],
                     "property_descriptions": "street, road, or square, where the item is located. To add the number, use Property:P670 \"street number\" as qualifier. Use property P969 if there is no item for the street.",
-                    "property_labels": "located on street",
-                    "property_id": "P669"
-                },
-                {
+                    "property_id": "P669",
                     "values": [
                         {
-                            "datatype": "external-id",
-                            "value_string": "",
-                            "value": "2020718/DR_5737"
+                            "value": "Q2361754",
+                            "value_string": "Tolstraat",
+                            "value_labels": "Tolstraat",
+                            "value_descriptions": "street in Amsterdam",
+                            "datatype": "wikibase-item"
                         }
                     ],
+                    "property_labels": "located on street"
+                },
+                {
                     "property_descriptions": "identifier in europeana.eu for books, paintings, films, museum objects and archival records that have been digitised throughout Europe",
-                    "property_labels": "Europeana ID",
-                    "property_id": "P727"
-                },
-                {
+                    "property_id": "P727",
                     "values": [
                         {
-                            "datatype": "wikibase-item",
-                            "value_labels": "Rijksmonument",
-                            "value_string": "Rijksmonument",
-                            "value": "Q916333",
-                            "value_descriptions": "national heritage site of the Netherlands"
+                            "value": "2020718/DR_5737",
+                            "value_string": "",
+                            "datatype": "external-id"
                         }
                     ],
+                    "property_labels": "Europeana ID"
+                },
+                {
                     "property_descriptions": "heritage designation of a historical site",
-                    "property_labels": "heritage designation",
-                    "property_id": "P1435"
+                    "property_id": "P1435",
+                    "values": [
+                        {
+                            "value": "Q916333",
+                            "value_string": "Rijksmonument",
+                            "value_labels": "Rijksmonument",
+                            "value_descriptions": "national heritage site of the Netherlands",
+                            "datatype": "wikibase-item"
+                        }
+                    ],
+                    "property_labels": "heritage designation"
                 }
-            ],
-            "id": "Q2092563",
-            "aliases": null
+            ]
         }
-    },
-    "error": false
+    }
 }

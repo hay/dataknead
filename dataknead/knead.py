@@ -6,12 +6,8 @@ class Knead:
     _type = None
     _data = None
 
-    def __init__(self, inp, filetype = None):
-        """
-        print()
-        print("INP: %s" % inp)
-        """
-        if isinstance(inp, str):
+    def __init__(self, inp, filetype = None, is_data = False):
+        if isinstance(inp, str) and not is_data:
             # We assume this is a path, load the data
             # If we have a filetype forced, use that, otherwise get it from
             # the file extension
@@ -97,7 +93,7 @@ class Knead:
             if not val:
                 break;
 
-        return val
+        return Knead(val, is_data = True)
 
     def write(self, path, filetype = None, indent = None, fieldnames = None):
         if not filetype:

@@ -7,13 +7,16 @@ from dataknead import Knead
 
 data = Knead("data/entity.json").data()
 Knead(data).write("data/entity.json", indent = 4)
-print(Knead(data).query("response/Q2092563/image/full"))
+print(Knead(data).query("response/Q2092563/image/full").data())
 
-claims = []
-for claim in Knead(data).query("response/Q2092563/claims/"):
-    claims.append({ k:v for k,v in claim.items() if isinstance(v, str)})
+claims = Knead(data).query("response/Q2092563/claims/")
+claims.write("data/claims.json")
 
-Knead(claims).write("data/entity.csv")
+myclaims = []
+for claim in claims.data():
+    myclaims.append({ k:v for k,v in claim.items() if isinstance(v, str)})
+
+Knead(myclaims).write("data/entity.csv")
 
 def mapfn(row):
     row["property_descriptions"] = row["property_descriptions"].upper()
