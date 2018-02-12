@@ -3,8 +3,8 @@ from pathlib import Path
 
 class Knead:
     SUPPORTED_TYPES = ("csv", "json")
-    type = None
-    data = None
+    _type = None
+    _data = None
 
     def __init__(self, inp, filetype = None):
         """
@@ -16,29 +16,29 @@ class Knead:
             # If we have a filetype forced, use that, otherwise get it from
             # the file extension
             if filetype:
-                self.type = filetype
+                self._type = filetype
             else:
-                self.type = self._get_filetype(inp)
+                self._type = self._get_filetype(inp)
 
             self._load(inp)
         else:
             # We assume this is data, assign it
-            self.type = type(inp).__name__
+            self._type = type(inp).__name__
             self._data = inp
 
     def _get_filetype(self, path):
         filetype = Path(path).suffix[1:]
 
         if filetype not in self.SUPPORTED_TYPES:
-            raise Exception("Unsupported file type: %s" % self.type)
+            raise Exception("Unsupported file type: %s" % filetype)
         else:
             return filetype
 
     def _load(self, pathstr):
         with open(pathstr) as f:
-            if self.type == "json":
+            if self._type == "json":
                 self._data = json.loads(f.read())
-            elif self.type == "csv":
+            elif self._type == "csv":
                 reader = csv.DictReader(f)
                 self._data = [row for row in reader]
 
@@ -62,20 +62,24 @@ class Knead:
             jsondata = json.dumps(self.data(), indent = indent)
             f.write(jsondata)
 
-    def data(self):
+    def data(self, check_instance = None):
+        datatype = type(self._data)
+
+        if check_instance and not isinstance(self._data, check_instance):
+            raise Exception(
+                "Data of type %s can not be processed, needs to be %s" %
+                ( datatype.__name__, check_instance.__name__)
+            )
+
         return self._data
 
     def filter(self, fn):
-        data = [row for row in self.data() if fn(row)]
+        data = [row for row in self.data(check_instance = list) if fn(row)]
         return Knead(data)
 
     def map(self, fn):
-        data = [fn(row) for row in self.data()]
+        data = [fn(row) for row in self.data(check_instance = list)]
         return Knead(data)
-
-    def print(self, indent = 4):
-        data = json.dumps(self.data(), indent = indent)
-        print(data)
 
     def query(self, path, default = None):
         keys = path.split("/")
@@ -95,8 +99,9 @@ class Knead:
 
         return val
 
-    def write(self, path, indent = None, fieldnames = None):
-        filetype = self._get_filetype(path)
+    def write(self, path, filetype = None, indent = None, fieldnames = None):
+        if not filetype:
+            filetype = self._get_filetype(path)
 
         if filetype == "json":
             self._write_json(path, indent)
