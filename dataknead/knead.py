@@ -22,6 +22,9 @@ class Knead:
             self._type = type(inp).__name__
             self._data = inp
 
+    def __str__(self):
+        return json.dumps(self.data(), indent = 4)
+
     def _get_filetype(self, path):
         filetype = Path(path).suffix[1:]
 
@@ -47,22 +50,27 @@ class Knead:
                 self._data = [row for row in reader]
 
     def _write_csv(self, path, fieldnames = None):
-        if not self._is_tabular():
-            raise Exception("Data is not a list with dict objects")
-
         data = self.data()
 
-        # First extract all the fieldnames from the list
-        if not fieldnames:
-            fieldnames = set()
-            for item in data:
-                [fieldnames.add(key) for key in item.keys()]
+        if self._is_tabular():
+            # First extract all the fieldnames from the list
+            if not fieldnames:
+                fieldnames = set()
+                for item in data:
+                    [fieldnames.add(key) for key in item.keys()]
 
-        # Then open the CSV file and write
-        with open(path, "w") as f:
-            writer = csv.DictWriter(f, fieldnames = fieldnames)
-            writer.writeheader()
-            [writer.writerow(row) for row in data]
+            # Then open the CSV file and write
+            with open(path, "w") as f:
+                writer = csv.DictWriter(f, fieldnames = fieldnames)
+                writer.writeheader()
+                [writer.writerow(row) for row in data]
+        elif isinstance(data, list):
+            # Assume this is a 'simple' list
+            with open(path, "w") as f:
+                writer = csv.writer(f)
+                [writer.writerow([row]) for row in data]
+        else:
+            raise TypeError("Can't write type '%s' to csv" % data.__name__)
 
     def _write_json(self, path, indent = None):
         with open(path, "w") as f:
