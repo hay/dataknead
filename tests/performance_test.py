@@ -1,4 +1,4 @@
-from context import dataknead
+from _context import dataknead
 from dataknead import Knead
 
 import json, csv

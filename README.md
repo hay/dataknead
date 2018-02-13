@@ -39,7 +39,7 @@ Venice,it,265000
 
 And you want to load this csv file and transform it to a json file.
 
-```pytyhon
+```python
 from dataknead import Knead
 
 cities = Knead("cities.csv").write("cities.json")
@@ -58,6 +58,21 @@ You'll now have a json file called `cities.json` that looks like this:
 ]
 ```
 
+Maybe you just want the city names and write them to a CSV filed called `city-names.csv`.
+
+```python
+from dataknead import Knead
+
+Knead("cities.csv").map("city").write("city-names.csv")
+```
+
+That will give you this list
+```csv
+Amsterdam
+Rotterdam
+Venice
+```
+
 Now you want to extract only the cities that are located in Italy, and write that back to a new csv file called `cities-italy.csv`:
 
 ```python
@@ -66,15 +81,17 @@ from dataknead import Knead
 Knead("cities.csv").filter(lambda r:r["country"] == "it").write("cities-italy.csv")
 ````
 
-This gives you this
+This gives you this:
 
 ```csv
 city,country,population
 Venice,it,265000
 ```
 
+Notice the header that you get for free because you have a list with dicts.
+
 ## Advanced example
-Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/test.py)
+Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py)
 
 ## Performance
 Performance drawbacks should be neglible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/compare.py).
