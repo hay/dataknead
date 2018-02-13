@@ -27,7 +27,14 @@ class CsvLoader(BaseLoader):
 
     @staticmethod
     def write(f, data, fieldnames = None):
+        # First check if we can write this to a file
+        if (not isinstance(data, list)) and (not isinstance(data, dict)):
+            raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
+
+        # Four ways to write data to a CSV file :)
         if all([isinstance(i, dict) for i in data]):
+            # List with dictionaries saved as a file with a header
+
             # First extract all the fieldnames from the list
             if not fieldnames:
                 fieldnames = set()
@@ -59,5 +66,3 @@ class CsvLoader(BaseLoader):
             writer = csv.writer(f)
             writer.writerow(data.keys())
             writer.writerow(data.values())
-        else:
-            raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
