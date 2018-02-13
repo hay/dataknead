@@ -1,5 +1,5 @@
 from context import dataknead
-from dataknead import Knead
+from dataknead import Knead, BaseLoader
 from itertools import chain
 
 # Read json file
@@ -7,6 +7,18 @@ entity = Knead("input/entity.json")
 
 # Write back to a json file, indented
 entity.write("output/entity.json", indent = 4)
+
+# Add a custom loader for textfiles
+class TextLoader(BaseLoader):
+    EXTENSION = "txt"
+
+    @staticmethod
+    def read(f):
+        return f.read().split("\n")
+
+Knead.loaders.append(TextLoader)
+
+Knead("input/names.txt").write("output/names.json")
 
 # Print the description using query()
 print(entity.query("entities/Q184843/descriptions/en/value"))

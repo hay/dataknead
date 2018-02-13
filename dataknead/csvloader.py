@@ -1,0 +1,63 @@
+import csv
+from .baseloader import BaseLoader
+
+class CsvLoader(BaseLoader):
+    EXTENSION = "csv"
+
+    @staticmethod
+    def read(f):
+        # Check if we have a header, and then use DictReader, otherwise
+        # just read as regular csv
+        sniffer = csv.Sniffer()
+
+        try:
+            has_header = sniffer.has_header(f.read(2048))
+        except:
+            # No delimiter, assume this is just a list of newline-separated values
+            has_header = False
+
+        f.seek(0)
+
+        if has_header:
+            reader = csv.DictReader(f)
+        else:
+            reader = csv.reader(f)
+
+        return [row for row in reader]
+
+    @staticmethod
+    def write(f, data, fieldnames = None):
+        if all([isinstance(i, dict) for i in data]):
+            # First extract all the fieldnames from the list
+            if not fieldnames:
+                fieldnames = set()
+                for item in data:
+                    [fieldnames.add(key) for key in item.keys()]
+
+            # Then open the CSV file and write
+            writer = csv.DictWriter(f, fieldnames = fieldnames)
+            writer.writeheader()
+            [writer.writerow(row) for row in data]
+        elif all([isinstance(i, list) for i in data]):
+            # A list with lists
+            writer = csv.writer(f)
+
+            if fieldnames:
+                writer.writerow(fieldnames)
+
+            [writer.writerow(row) for row in data]
+        elif isinstance(data, list):
+            # Just one single column
+            writer = csv.writer(f)
+
+            if fieldnames:
+                writer.writerow(fieldnames)
+
+            [writer.writerow([row]) for row in data]
+        elif isinstance(data, dict):
+            # Only a header and one row
+            writer = csv.writer(f)
+            writer.writerow(data.keys())
+            writer.writerow(data.values())
+        else:
+            raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
