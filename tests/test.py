@@ -1,8 +1,4 @@
-import sys, os
-from time import time
-from statistics import mean
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+from context import dataknead
 from dataknead import Knead
 from itertools import chain
 
@@ -41,7 +37,6 @@ sitelinks.map("title").filter(lambda t:t != "Blade Runner").write("output/siteli
 
 # Here's a pretty complex example, showing off all the different methods
 # First define two helper functions we are going to be using
-
 def propvalue(claim):
     claim = Knead(claim)
 

@@ -96,6 +96,9 @@ class Knead:
         data = [row for row in self.data(check_instance = list) if fn(row)]
         return Knead(data)
 
+    def keys(self):
+        return Knead(list(self.data().keys()))
+
     def map(self, iteratee):
         data = self.data(check_instance = list)
 
@@ -134,6 +137,8 @@ class Knead:
         self._data = fn(self.data())
         return self
 
+    def values(self):
+        return Knead(list(self.data().values()))
 
     def write(self, path, filetype = None, indent = None, fieldnames = None):
         if not filetype:
