@@ -2,58 +2,28 @@ import csv, json
 from pathlib import Path
 from io import StringIO
 
-class Knead:
-    SUPPORTED_TYPES = ("csv", "json")
-    _filetype = None
-    _data = None
+class JsonLoader:
+    EXTENSION = "json"
 
-    def __init__(self, inp, filetype = None, is_data = False, process_as = False):
-        if process_as:
-            # Process string like file
-            if not isinstance(inp, str):
-                raise TypeError("Input needs to be string, not %s" % type(inp).__name__)
+    @staticmethod
+    def read(f):
+        data = f.read()
+        return json.loads(data)
 
-            self._filetype = process_as
-            f = StringIO(inp)
-            self._load(f)
-        elif isinstance(inp, str) and not is_data:
-            # We assume this is a path, load the data
-            # If we have a filetype forced, use that, otherwise get it from
-            # the file extension
-            if filetype:
-                self._filetype = filetype
-            else:
-                self._filetype = self._get_filetype(inp)
+    @staticmethod
+    def save(f, data, indent = None):
+        jsondata = json.dumps(data, indent = indent)
+        f.write(jsondata)
 
-            with open(inp) as f:
-                self._load(f)
-        else:
-            # We assume this is data, assign it
-            self._data = inp
+class CsvLoader:
+    EXTENSION = "csv"
 
-    def __str__(self):
-        return json.dumps(self.data(), indent = 4)
-
-    def _get_filetype(self, path):
-        filetype = Path(path).suffix[1:]
-
-        if filetype not in self.SUPPORTED_TYPES:
-            raise Exception("Unsupported file type: %s" % filetype)
-        else:
-            return filetype
-
-    def _load(self, f):
-        if self._filetype == "json":
-            self._data = json.loads(f.read())
-        elif self._filetype == "csv":
-            self._load_csv(f)
-
-        f.close()
-
-    def _load_csv(self, f):
+    @staticmethod
+    def read(f):
         # Check if we have a header, and then use DictReader, otherwise
         # just read as regular csv
         sniffer = csv.Sniffer()
+
         try:
             has_header = sniffer.has_header(f.read(2048))
         except:
@@ -67,11 +37,10 @@ class Knead:
         else:
             reader = csv.reader(f)
 
-        self._data = [row for row in reader]
+        return [row for row in reader]
 
-    def _write_csv(self, path, fieldnames = None):
-        data = self.data()
-
+    @staticmethod
+    def save(f, data, fieldnames = None):
         if all([isinstance(i, dict) for i in data]):
             # First extract all the fieldnames from the list
             if not fieldnames:
@@ -80,41 +49,70 @@ class Knead:
                     [fieldnames.add(key) for key in item.keys()]
 
             # Then open the CSV file and write
-            with open(path, "w") as f:
-                writer = csv.DictWriter(f, fieldnames = fieldnames)
-                writer.writeheader()
-                [writer.writerow(row) for row in data]
+            writer = csv.DictWriter(f, fieldnames = fieldnames)
+            writer.writeheader()
+            [writer.writerow(row) for row in data]
         elif all([isinstance(i, list) for i in data]):
             # A list with lists
-            with open(path, "w") as f:
-                writer = csv.writer(f)
+            writer = csv.writer(f)
 
-                if fieldnames:
-                    writer.writerow(fieldnames)
+            if fieldnames:
+                writer.writerow(fieldnames)
 
-                [writer.writerow(row) for row in data]
+            [writer.writerow(row) for row in data]
         elif isinstance(data, list):
             # Just one single column
-            with open(path, "w") as f:
-                writer = csv.writer(f)
+            writer = csv.writer(f)
 
-                if fieldnames:
-                    writer.writerow(fieldnames)
+            if fieldnames:
+                writer.writerow(fieldnames)
 
-                [writer.writerow([row]) for row in data]
+            [writer.writerow([row]) for row in data]
         elif isinstance(data, dict):
             # Only a header and one row
-            with open(path, "w") as f:
-                writer = csv.writer(f)
-                writer.writerow(data.keys())
-                writer.writerow(data.values())
+            writer = csv.writer(f)
+            writer.writerow(data.keys())
+            writer.writerow(data.values())
         else:
             raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
 
-    def _write_json(self, path, indent = None):
-        with open(path, "w") as f:
-            jsondata = json.dumps(self.data(), indent = indent)
-            f.write(jsondata)
+class Knead:
+    LOADERS = [JsonLoader, CsvLoader]
+
+    _data = None
+
+    def __init__(self, inp, parse_as = None, read_as = None, is_data = False):
+        if parse_as:
+            # Process string like file
+            if not isinstance(inp, str):
+                raise TypeError("Input needs to be string, not %s" % type(inp).__name__)
+
+            loader = self._get_loader(parse_as)
+            f = StringIO(inp)
+            self._data = loader.read(f)
+        elif isinstance(inp, str) and not is_data:
+            # Either a path or a stringified data file
+            if not read_as:
+                read_as = Path(inp).suffix[1:]
+
+            loader = self._get_loader(read_as)
+
+            with open(inp) as f:
+                self._data = loader.read(f)
+        else:
+            # We assume this is parsed data, assign it
+            self._data = inp
+
+    def __str__(self):
+        return json.dumps(self.data(), indent = 4)
+
+    def _get_loader(self, extension):
+        for loader in self.LOADERS:
+            if loader.EXTENSION == extension:
+                return loader
+
+        raise Error("Could not find loader for type '%s'" % extension)
+
 
     def data(self, check_instance = None):
         datatype = type(self._data)
@@ -175,11 +173,11 @@ class Knead:
     def values(self):
         return Knead(list(self.data().values()))
 
-    def write(self, path, filetype = None, indent = None, fieldnames = None):
-        if not filetype:
-            filetype = self._get_filetype(path)
+    def write(self, path, write_as = None, **kwargs):
+        if not write_as:
+            write_as = Path(path).suffix[1:]
 
-        if filetype == "json":
-            self._write_json(path, indent = indent)
-        elif filetype == "csv":
-            self._write_csv(path, fieldnames = fieldnames)
+        loader = self._get_loader(write_as)
+
+        with open(path, "w") as f:
+            loader.save(f, self.data(), **kwargs)
