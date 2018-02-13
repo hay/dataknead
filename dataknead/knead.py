@@ -1,13 +1,22 @@
 import csv, json
 from pathlib import Path
+from io import StringIO
 
 class Knead:
     SUPPORTED_TYPES = ("csv", "json")
     _filetype = None
     _data = None
 
-    def __init__(self, inp, filetype = None, is_data = False):
-        if isinstance(inp, str) and not is_data:
+    def __init__(self, inp, filetype = None, is_data = False, process_as = False):
+        if process_as:
+            # Process string like file
+            if not isinstance(inp, str):
+                raise TypeError("Input needs to be string, not %s" % type(inp).__name__)
+
+            self._filetype = process_as
+            f = StringIO(inp)
+            self._load(f)
+        elif isinstance(inp, str) and not is_data:
             # We assume this is a path, load the data
             # If we have a filetype forced, use that, otherwise get it from
             # the file extension
@@ -16,7 +25,8 @@ class Knead:
             else:
                 self._filetype = self._get_filetype(inp)
 
-            self._load(inp)
+            with open(inp) as f:
+                self._load(f)
         else:
             # We assume this is data, assign it
             self._data = inp
@@ -32,13 +42,32 @@ class Knead:
         else:
             return filetype
 
-    def _load(self, pathstr):
-        with open(pathstr) as f:
-            if self._filetype == "json":
-                self._data = json.loads(f.read())
-            elif self._filetype == "csv":
-                reader = csv.DictReader(f)
-                self._data = [row for row in reader]
+    def _load(self, f):
+        if self._filetype == "json":
+            self._data = json.loads(f.read())
+        elif self._filetype == "csv":
+            self._load_csv(f)
+
+        f.close()
+
+    def _load_csv(self, f):
+        # Check if we have a header, and then use DictReader, otherwise
+        # just read as regular csv
+        sniffer = csv.Sniffer()
+        try:
+            has_header = sniffer.has_header(f.read(2048))
+        except:
+            # No delimiter, assume this is just a list of newline-separated values
+            has_header = False
+
+        f.seek(0)
+
+        if has_header:
+            reader = csv.DictReader(f)
+        else:
+            reader = csv.reader(f)
+
+        self._data = [row for row in reader]
 
     def _write_csv(self, path, fieldnames = None):
         data = self.data()
@@ -73,6 +102,12 @@ class Knead:
                     writer.writerow(fieldnames)
 
                 [writer.writerow([row]) for row in data]
+        elif isinstance(data, dict):
+            # Only a header and one row
+            with open(path, "w") as f:
+                writer = csv.writer(f)
+                writer.writerow(data.keys())
+                writer.writerow(data.values())
         else:
             raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
 

@@ -2,7 +2,32 @@
 
 An intuitive Python library for processing and converting text-based data formats like JSON and CSV.
 
-## Example
+Have you ever grudged about writing code like this?
+
+```python
+import csv
+import json
+
+with open("names.json") as f:
+    data = json.loads(f.read())
+
+data = [row["name"] for row in data if "John" in row["name"]]
+
+with open("names.csv", "w") as f:
+    writer = csv.writer(f)
+    writer.writerow(["name"])
+    [writer.writerow([row]) for row in data]
+```
+
+Now you can write it like this:
+
+```python
+from dataknead import Knead
+Knead("names.json").filter(lambda r:"John" in r["name"]).write("names.csv")
+```
+
+## Basic example
+
 Let's say you have a small CSV file with cities called `cities.csv`.
 
 ```csv
@@ -48,10 +73,11 @@ city,country,population
 Venice,it,265000
 ```
 
-## Caveats
-* `dataknead` only supports CSV and JSON
-* The only format writable to CSV and JSON is a `dict` or a `list` with `dict` structures. If you only have a list, use `map` to add a key to it, like this:
+## Advanced example
+Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/test.py)
 
-```python
-Knead([1,2,3]).map(lambda i:{ "number" : i }).write("numbers.csv")
-```
+## Performance
+Performance drawbacks should be neglible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/compare.py).
+
+## Caveats
+* `dataknead` only supports CSV and JSON out-of-the-box.
