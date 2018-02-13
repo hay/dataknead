@@ -101,7 +101,7 @@ If `inp` is a string, a filepath is implied and the extension is used to get the
 Knead("cities.csv")
 ```
 
-To overwrite this behaviour (for a file that doesn't have the correct), use the `read_as` argument.
+To overwrite this behaviour (for a file that doesn't have the correct extension), use the `read_as` argument.
 ```python
 Knead("cities", read_as="csv")
 ```
@@ -153,7 +153,7 @@ Run a function over all elements in the data.
 Knead("cities.csv").map(lambda city:city["city"].upper()).write("cities-uppercased.json")
 ```
 
-To return one key in every item, you can pass a string as a shortcut
+To return one key in every item, you can pass a string as a shortcut:
 ```python
 Knead("cities.csv").map("city").write("city-names.csv")
 # Is the same as
@@ -161,7 +161,7 @@ Knead("cities.csv").map(lambda c:c["city"]).write("city-names.csv")
 ```
 
 ### `print()`
-Prints the current data, formatted using `json.dumps`. Note that these two lines are equivalent:
+Prints the current data, formatted using `json.dumps`. These two lines are equivalent:
 ```python
 print(Knead("cities.csv"))
 Knead("cities.csv").print()
@@ -210,7 +210,7 @@ Knead("cities.csv").map("city").write("ciites.csv", fieldnames=["city"])
 You can write your own loaders to read and write other formats than the default ones. For an example take a look at the [advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
 
 ## Performance
-Performance drawbacks should be neglible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/performance_test.py).
+Performance drawbacks should be negligible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/performance_test.py).
 
 ## Credits
 Written by [Hay Kranen](https://www.haykranen.nl).
