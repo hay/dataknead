@@ -41,6 +41,13 @@ class Knead:
 
         raise Exception("Could not find loader for type '%s'" % extension)
 
+    def apply(self, fn):
+        """
+        Runs a function over the data
+        """
+        self._data = fn(self.data())
+        return self
+
 
     def data(self, check_instance = None):
         datatype = type(self._data)
@@ -90,13 +97,6 @@ class Knead:
                 break
 
         return Knead(val, is_data = True)
-
-    def transform(self, fn):
-        """
-        Runs a function over the data
-        """
-        self._data = fn(self.data())
-        return self
 
     def values(self):
         return Knead(list(self.data().values()))

@@ -121,6 +121,12 @@ To force parsing of a string to data (e.g., from a JSON HTTP request), set `pars
 Knead('{"error" : 404}', parse_as="json")
 ```
 
+### `apply(`*fn*`)`
+Runs all data through a function.
+```python
+Knead(["a", "b", "c"]).apply(lambda x:"".join(x)).print() # 'abc'
+```
+
 ### `data(`*check_instance = None*`)`
 Returns the parsed data.
 ```python
@@ -178,12 +184,6 @@ Knead({
         }
     }
 }).query("image/full/src").print() # 'http://github.com/logo.png'
-```
-
-### `transform(`*fn*`)`
-Runs all data through a function.
-```python
-Knead(["a", "b", "c"]).transform(lambda x:"".join(x)).print() # 'abc'
 ```
 
 ### `values()`

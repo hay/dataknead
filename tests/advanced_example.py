@@ -25,8 +25,8 @@ print(entity.query("entities/Q184843/descriptions/en/value"))
 
 # Get all the sitelinks and show the three different ways we can write
 # this to a csv file.
-# First get the sitelinks as a list using 'transform'
-sitelinks = entity.query("entities/Q184843/sitelinks").transform(lambda d:list(d.values()))
+# First get the sitelinks as a list using 'apply'
+sitelinks = entity.query("entities/Q184843/sitelinks").apply(lambda d:list(d.values()))
 
 # First write it as a list with dicts, adding a header
 sitelinks.write("output/sitelinks-header.csv")
@@ -62,4 +62,4 @@ def transform(claims):
     return [propvalue(c) for c in list(values)]
 
 # Finally, query claims, flatten them and write to csv
-entity.query("entities/Q184843/claims").transform(transform).write("output/claims.csv")
+entity.query("entities/Q184843/claims").apply(transform).write("output/claims.csv")
