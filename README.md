@@ -1,6 +1,6 @@
 # dataknead
 
-An intuitive Python library for processing and converting text-based data formats like JSON and CSV.
+An intuitive Python 3 library for processing and converting text-based data formats like JSON and CSV.
 
 Have you ever grudged about writing code like this?
 
@@ -211,6 +211,9 @@ You can write your own loaders to read and write other formats than the default 
 
 ## Performance
 Performance drawbacks should be negligible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/performance_test.py).
+
+## Remarks
+* Note that `dataknead` is Python 3-only.
 
 ## Credits
 Written by [Hay Kranen](https://www.haykranen.nl).

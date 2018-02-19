@@ -1,16 +1,15 @@
-# !/usr/bin/env python
-
 from distutils.core import setup
 
 setup(
     name='dataknead',
-    packages=[],
+    packages=["dataknead"],
     version='0.1.0',
-    description='An intuitive Python library for processing and converting text-based data formats like JSON and CSV.',
+    description='An intuitive Python library for processing and converting text-based data formats like JSON and CSV',
     author='Hay Kranen',
     license='MIT',
     author_email='huskyr@gmail.com',
     url='https://github.com/hay/dataknead',
+    download_url='https://github.com/hay/dataknead/archive/0.1.0.tar.gz',
     keywords='data analysis json csv',
     classifiers=[
         'Development Status :: 4 - Beta',
