@@ -1,6 +1,7 @@
 # !/usr/bin/env python
 
 from distutils.core import setup
+
 setup(
     name='dataknead',
     packages=[],
@@ -10,17 +11,17 @@ setup(
     license='MIT',
     author_email='huskyr@gmail.com',
     url='https://github.com/hay/dataknead',
-    keywords=['data', 'analysis', ],
+    keywords='data analysis json csv',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development',
-    ],
+    ]
 )
