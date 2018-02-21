@@ -26,6 +26,21 @@ from dataknead import Knead
 Knead("names.json").filter(lambda r:"John" in r["name"]).write("names.csv")
 ```
 
+## Installation
+Install `dataknead` from [PyPi](https://pypi.python.org/pypi/dataknead/0.1.0)
+
+```shell
+pip install dataknead
+```
+
+Then import
+
+```python
+from dataknead import Knead
+```
+
+Note that `dataknead` is Python 3-only.
+
 ## Basic example
 
 Let's say you have a small CSV file with cities called `cities.csv`.
@@ -42,7 +57,7 @@ And you want to load this csv file and transform it to a json file.
 ```python
 from dataknead import Knead
 
-cities = Knead("cities.csv").write("cities.json")
+Knead("cities.csv").write("cities.json")
 ```
 
 You'll now have a json file called `cities.json` that looks like this:
