@@ -2,7 +2,7 @@
 
 An intuitive Python 3 library for processing and converting text-based data formats like JSON and CSV.
 
-Have you ever grudged about writing code like this?
+Have you ever sighed when writing code like this?
 
 ```python
 import csv
