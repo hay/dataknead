@@ -252,7 +252,7 @@ Knead("cities.csv").map("city").write("ciites.csv", fieldnames=["city"])
 ```
 
 ## Extending dataknead
-You can write your own loaders to read and write other formats than the default ones (`csv`, `json` and `txt`). For an example take a look at the [advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
+You can write your own loaders to read and write other formats than the default ones (`csv`, `json` and `txt`). For an example take a look at the [example](https://github.com/hay/dataknead/blob/master/tests/excel_example.py) for loading Excel files.
 
 ## Performance
 Performance drawbacks should be negligible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/performance_test.py).
