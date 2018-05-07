@@ -136,6 +136,12 @@ To force parsing of a string to data (e.g., from a JSON HTTP request), set `pars
 Knead('{"error" : 404}', parse_as="json")
 ```
 
+Some loaders might come with extra arguments. E.g. the `csv` loader has an option to force using a header, if it isn't detected automatically
+
+```python
+Knead("cities.csv", has_header = True)
+```
+
 The default loaders are for `csv`, `json` and `txt` files.
 
 ### `apply(`*fn*`)`

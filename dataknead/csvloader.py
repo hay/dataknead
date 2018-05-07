@@ -5,18 +5,20 @@ class CsvLoader(BaseLoader):
     EXTENSION = "csv"
 
     @staticmethod
-    def read(f):
-        # Check if we have a header, and then use DictReader, otherwise
-        # just read as regular csv
-        sniffer = csv.Sniffer()
+    def read(f, has_header = None):
+        # If not forcing the header, sniff if we've got one
+        # and then use DictReader, otherwise just read as regular csv
+        # csv.Sniffer can fail at times (see #5), so the user can overrule this
+        if has_header == None:
+            sniffer = csv.Sniffer()
 
-        try:
-            has_header = sniffer.has_header(f.read(2048))
-        except:
-            # No delimiter, assume this is just a list of newline-separated values
-            has_header = False
+            try:
+                has_header = sniffer.has_header(f.read(2048))
+            except:
+                # No delimiter, assume this is just a list of newline-separated values
+                has_header = False
 
-        f.seek(0)
+            f.seek(0)
 
         if has_header:
             reader = csv.DictReader(f)

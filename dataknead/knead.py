@@ -10,7 +10,7 @@ class Knead:
 
     _data = None
 
-    def __init__(self, inp, parse_as = None, read_as = None, is_data = False):
+    def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
         if parse_as:
             # Process string like file
             if not isinstance(inp, str):
@@ -18,7 +18,7 @@ class Knead:
 
             loader = self._get_loader(parse_as)
             f = StringIO(inp)
-            self._data = loader.read(f)
+            self._data = loader.read(f, **kwargs)
         elif isinstance(inp, str) and not is_data:
             # Either a path or a stringified data file
             if not read_as:
@@ -27,7 +27,7 @@ class Knead:
             loader = self._get_loader(read_as)
 
             with open(inp) as f:
-                self._data = loader.read(f)
+                self._data = loader.read(f, **kwargs)
         else:
             # We assume this is parsed data, assign it
             self._data = inp

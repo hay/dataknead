@@ -37,6 +37,9 @@ sitelinks.map(lambda d:{"site" : d["site"], "title" : d["title"]}).write("output
 # Let's also make a list of all titles that are not 'Blade Runner'
 sitelinks.map("title").filter(lambda t:t != "Blade Runner").write("output/sitelinks-other-title.csv")
 
+# Some loaders can also have additional loading options
+Knead("output/sitelinks-header.csv", has_header = True).write("output/sitelinks-header.json", indent = 4)
+
 # Here's a pretty complex example, showing off all the different methods
 # First define two helper functions we are going to be using
 def propvalue(claim):
