@@ -269,7 +269,9 @@ Licensed under the [MIT license](https://opensource.org/licenses/MIT).
 ## Release history
 
 ### 0.2
-* Adding tuple shortcut to `map`
+* Adding tuple shortcut to `map` (#2)
+* Adding support for `txt` files ((#4)
+* Adding support for loader constructor argument passing, and adding a `has_header` option to `CsvLoader` (#5)
 
 ### 0.1
 Initial release
