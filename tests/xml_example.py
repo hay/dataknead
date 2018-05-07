@@ -1,7 +1,7 @@
+from _context import dataknead
 from dataknead import Knead, BaseLoader
 import xmltodict
 
-# Add a custom loader for textfiles
 class XmlLoader(BaseLoader):
     EXTENSION = "xml"
 
