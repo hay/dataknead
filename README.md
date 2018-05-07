@@ -168,7 +168,7 @@ Knead("cities.csv").filter(is_italian).write("cities-italy.csv")
 ### `keys()`
 Returns the keys of the data.
 
-### `map(`*fn*`)`
+### `map(`*fn* | *str* | *tuple*`)`
 Run a function over all elements in the data.
 ```python
 Knead("cities.csv").map(lambda city:city["city"].upper()).write("cities-uppercased.json")
@@ -177,8 +177,30 @@ Knead("cities.csv").map(lambda city:city["city"].upper()).write("cities-uppercas
 To return one key in every item, you can pass a string as a shortcut:
 ```python
 Knead("cities.csv").map("city").write("city-names.csv")
+
 # Is the same as
+
 Knead("cities.csv").map(lambda c:c["city"]).write("city-names.csv")
+```
+
+To return multiple keys with values, you can use a tuple:
+```python
+Knead("cities.csv").map(("city", "country")).write("city-country-names.csv")
+
+# Is the same as
+
+Knead("cities.csv").map(lambda c:{ "city" : c["city"], "country" : c["country"] }).write("city-country-names.csv")
+
+# Or
+
+def mapcity(city):
+    return {
+        "city" : city["city"],
+        "country" : city["country"]
+    }
+
+Knead("cities.csv").map(mapcity).write("city-country-names.csv")
+
 ```
 
 ### `print()`
@@ -235,3 +257,11 @@ Written by [Hay Kranen](https://www.haykranen.nl).
 
 ## License
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Release history
+
+### 0.2
+* Adding tuple shortcut to `map`
+
+### 0.1
+Initial release

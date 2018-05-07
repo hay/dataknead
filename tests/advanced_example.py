@@ -31,18 +31,18 @@ sitelinks = entity.query("entities/Q184843/sitelinks").apply(lambda d:list(d.val
 # First write it as a list with dicts, adding a header
 sitelinks.write("output/sitelinks-header.csv")
 
-# Then write it as a list with two columns, only containing site and title
-# and manually added fieldnames
-sitelinks.map(lambda d:[d["site"], d["title"]]).write("output/sitelinks-twocol.csv", fieldnames=["site", "title"])
-
-# Note that this is the same thing as writing
-sitelinks.map(lambda d:{"site" : d["site"], "title" : d["title"]}).write("output/sitelinks-twocol.csv")
-
-# And finally as a single list, with just the titles
+# Write as a single list, with just the titles
 sitelinks.map(lambda d:d["title"]).write("output/sitelinks-single.csv")
 
 # And wait, we can even do this:
 sitelinks.map("title").write("output/sitelinks-single.csv")
+
+# Then write it as a list with two columns, only containing site and title
+# and manually added fieldnames
+sitelinks.map(("site", "title")).write("output/sitelinks-twocol.csv")
+
+# Note that this is the same thing as writing
+sitelinks.map(lambda d:{"site" : d["site"], "title" : d["title"]}).write("output/sitelinks-twocol.csv")
 
 # Let's also make a list of all titles that are not 'Blade Runner'
 sitelinks.map("title").filter(lambda t:t != "Blade Runner").write("output/sitelinks-other-title.csv")

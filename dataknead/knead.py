@@ -73,9 +73,12 @@ class Knead:
         # If 'iteratee' is a function, map over the data
         if callable(iteratee):
             data = [iteratee(row) for row in data]
+        # Shortcut, like 'pluck'
         elif isinstance(iteratee, str):
-            # Shortcut, like 'pluck'
             data = [row[iteratee] for row in data]
+        # Another shortcut, for mulitple keys
+        elif isinstance(iteratee, tuple):
+            data = [ { key:row[key] for key in iteratee } for row in data ]
         else:
             raise TypeError("Iteratee should be of type dict or function")
 
