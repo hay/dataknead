@@ -1,5 +1,5 @@
 from _context import dataknead
-from dataknead import Knead, BaseLoader
+from dataknead import Knead
 from itertools import chain
 
 # Read json file
@@ -7,16 +7,6 @@ entity = Knead("input/entity.json")
 
 # Write back to a json file, indented
 entity.write("output/entity.json", indent = 4)
-
-# Add a custom loader for textfiles
-class TextLoader(BaseLoader):
-    EXTENSION = "txt"
-
-    @staticmethod
-    def read(f):
-        return f.read().split("\n")
-
-Knead.loaders.append(TextLoader)
 
 Knead("input/names.txt").write("output/names.json")
 
@@ -31,11 +21,11 @@ sitelinks = entity.query("entities/Q184843/sitelinks").apply(lambda d:list(d.val
 # First write it as a list with dicts, adding a header
 sitelinks.write("output/sitelinks-header.csv")
 
-# Write as a single list, with just the titles
-sitelinks.map(lambda d:d["title"]).write("output/sitelinks-single.csv")
+# Write as a single textfile, with just the titles
+sitelinks.map(lambda d:d["title"]).write("output/sitelinks-single.txt")
 
 # And wait, we can even do this:
-sitelinks.map("title").write("output/sitelinks-single.csv")
+sitelinks.map("title").write("output/sitelinks-single.txt")
 
 # Then write it as a list with two columns, only containing site and title
 # and manually added fieldnames

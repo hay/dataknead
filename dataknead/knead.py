@@ -3,9 +3,10 @@ from pathlib import Path
 from io import StringIO
 from .csvloader import CsvLoader
 from .jsonloader import JsonLoader
+from .textloader import TextLoader
 
 class Knead:
-    loaders = [JsonLoader, CsvLoader]
+    loaders = [JsonLoader, CsvLoader, TextLoader]
 
     _data = None
 

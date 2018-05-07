@@ -136,6 +136,8 @@ To force parsing of a string to data (e.g., from a JSON HTTP request), set `pars
 Knead('{"error" : 404}', parse_as="json")
 ```
 
+The default loaders are for `csv`, `json` and `txt` files.
+
 ### `apply(`*fn*`)`
 Runs all data through a function.
 ```python
@@ -244,7 +246,7 @@ Knead("cities.csv").map("city").write("ciites.csv", fieldnames=["city"])
 ```
 
 ## Extending dataknead
-You can write your own loaders to read and write other formats than the default ones. For an example take a look at the [advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
+You can write your own loaders to read and write other formats than the default ones (`csv`, `json` and `txt`). For an example take a look at the [advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
 
 ## Performance
 Performance drawbacks should be negligible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/performance_test.py).
