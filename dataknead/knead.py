@@ -37,7 +37,7 @@ class Knead:
 
     def _get_loader(self, extension):
         for loader in self.loaders:
-            if loader.EXTENSION == extension:
+            if extension in loader.EXTENSION:
                 return loader
 
         raise Exception("Could not find loader for type '%s'" % extension)
