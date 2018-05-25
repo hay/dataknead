@@ -18,7 +18,9 @@ def main():
     parser.add_argument('output', type=str, nargs="?", help="Output file")
     parser.add_argument('--input-format', '-if', type=str, help="Input format")
     parser.add_argument('--output-format', '-of', type=str, help="Output format")
-    parser.add_argument('--stdin', action="store_true", help="Take data from stdin (requires --input-format")
+    parser.add_argument('--stdin', action="store_true",
+        help="Take data from stdin (requires --input-format)"
+    )
 
     args = parser.parse_args()
 
