@@ -1,6 +1,6 @@
 # dataknead
 
-An intuitive Python 3 library for processing and converting text-based data formats like JSON and CSV.
+An intuitive Python 3 library for processing and converting data formats like JSON and CSV.
 
 Have you ever sighed when writing code like this?
 
@@ -27,7 +27,7 @@ Knead("names.json").filter(lambda r:"John" in r["name"]).write("names.csv")
 ```
 
 ## Installation
-Install `dataknead` from [PyPi](https://pypi.python.org/pypi/dataknead/0.1.0)
+Install `dataknead` from [PyPi](https://pypi.python.org/pypi/dataknead)
 
 ```shell
 pip install dataknead
@@ -147,7 +147,7 @@ The default loaders are for `csv`, `json` and `txt` files.
 ### `apply(`*fn*`)`
 Runs all data through a function.
 ```python
-Knead(["a", "b", "c"]).apply(lambda x:"".join(x)).print() # 'abc'
+print(Knead(["a", "b", "c"]).apply(lambda x:"".join(x))) # 'abc'
 ```
 
 ### `data(`*check_instance = None*`)`
@@ -211,24 +211,19 @@ Knead("cities.csv").map(mapcity).write("city-country-names.csv")
 
 ```
 
-### `print()`
-Prints the current data, formatted using `json.dumps`. These two lines are equivalent:
-```python
-print(Knead("cities.csv"))
-Knead("cities.csv").print()
-```
-
 ### `query(`*path*`)`
 Queries a `dict` by using a path, separated by slashes.
 
 ```python
-Knead({
+src = Knead({
     "image" : {
         "full" : {
             "src" : "http://github.com/logo.png"
         }
     }
-}).query("image/full/src").print() # 'http://github.com/logo.png'
+}).query("image/full/src")
+
+print(src) # 'http://github.com/logo.png'
 ```
 
 ### `values()`

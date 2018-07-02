@@ -32,6 +32,9 @@ class Knead:
             # We assume this is parsed data, assign it
             self._data = inp
 
+    def __repr__(self):
+        return json.dumps(self.data(), indent = 4)
+
     def __str__(self):
         return json.dumps(self.data(), indent = 4)
 
@@ -84,9 +87,6 @@ class Knead:
             raise TypeError("Iteratee should be of type dict or function")
 
         return Knead(data)
-
-    def print(self):
-        print(self)
 
     def query(self, path, default = None):
         data = self.data(check_instance = dict)
