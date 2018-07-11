@@ -1,6 +1,7 @@
 import json
-from pathlib import Path
 from io import StringIO
+from jq import jq
+from pathlib import Path
 from .csvloader import CsvLoader
 from .jsonloader import JsonLoader
 from .textloader import TextLoader
@@ -88,19 +89,14 @@ class Knead:
 
         return Knead(data)
 
-    def query(self, path, default = None):
-        data = self.data(check_instance = dict)
-        keys = path.split("/")
-        val = data.get(keys.pop(0), default)
+    # This is basically a wrapper around jq
+    def query(self, query, default = None):
+        result = jq(path).transform(self.data)
 
-        for key in keys:
-            if isinstance(val, dict):
-                val = val.get(key, default)
-            else:
-                val = default
-                break
-
-        return Knead(val, is_data = True)
+        if not result and default:
+            return default
+        else:
+            return Knead(result, is_data = True)
 
     def values(self):
         return Knead(list(self.data().values()))
