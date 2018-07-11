@@ -92,9 +92,17 @@ class Knead:
     # This is basically a wrapper around jq
     def query(self, query, default = None):
         try:
-            result = jq(query).transform(self.data())
+            result = jq(query).transform(self.data(), multiple_output = True)
         except:
             return Knead(default, is_data = True)
+
+        # jq.py has this weird habit of not returning a list when there
+        # are multiple outputs, *however* when we set multiple_output = True,
+        # every result is a list, so we check here if the result is a list
+        # with just *one* item, and if so, just return the first item in that
+        # list
+        if (isinstance(result, list) and len(result) == 1):
+            result = result[0]
 
         if not result and default:
             return default
