@@ -91,7 +91,10 @@ class Knead:
 
     # This is basically a wrapper around jq
     def query(self, query, default = None):
-        result = jq(path).transform(self.data)
+        try:
+            result = jq(query).transform(self.data())
+        except:
+            return Knead(default, is_data = True)
 
         if not result and default:
             return default

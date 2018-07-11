@@ -11,12 +11,12 @@ entity.write("output/entity.json", indent = 4)
 Knead("input/names.txt").write("output/names.json")
 
 # Print the description using query()
-print(entity.query("entities/Q184843/descriptions/en/value"))
+print(entity.query(".entities.Q184843.descriptions.en.value"))
 
 # Get all the sitelinks and show the three different ways we can write
 # this to a csv file.
 # First get the sitelinks as a list using 'apply'
-sitelinks = entity.query("entities/Q184843/sitelinks").apply(lambda d:list(d.values()))
+sitelinks = entity.query(".entities.Q184843.sitelinks").apply(lambda d:list(d.values()))
 
 # First write it as a list with dicts, adding a header
 sitelinks.write("output/sitelinks-header.csv")
@@ -46,8 +46,8 @@ def propvalue(claim):
     claim = Knead(claim)
 
     return {
-        "id" : claim.query("mainsnak/datavalue/value/id").data(),
-        "property" : claim.query("mainsnak/property").data()
+        "id" : claim.query(".mainsnak.datavalue.value.id").data(),
+        "property" : claim.query(".mainsnak.property").data()
     }
 
 def transform(claims):
@@ -55,4 +55,4 @@ def transform(claims):
     return [propvalue(c) for c in list(values)]
 
 # Finally, query claims, flatten them and write to csv
-entity.query("entities/Q184843/claims").apply(transform).write("output/claims.csv")
+entity.query(".entities.Q184843.claims").apply(transform).write("output/claims.csv")
