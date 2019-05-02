@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from dataknead import Knead
+from .knead import Knead
 from pathlib import Path
 from os.path import isfile
 import argparse
@@ -70,7 +70,7 @@ def main():
         else:
             raise Exception("Filenames without extension require the --output-format argument")
 
-if __name__ == "__main__":
+def run():
     try:
         main()
     except Exception as e:

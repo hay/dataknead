@@ -13,6 +13,9 @@ pandas = "^0.24.2"
 
 [tool.poetry.dev-dependencies]
 
+[tool.poetry.scripts]
+knead = "dataknead.console:run"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
