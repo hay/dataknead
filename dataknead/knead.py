@@ -2,12 +2,14 @@ import json
 from io import StringIO
 from jq import jq
 from pathlib import Path
-from .loaders.csvloader import CsvLoader
-from .loaders.jsonloader import JsonLoader
-from .loaders.textloader import TextLoader
+from .loaders.csv import CsvLoader
+from .loaders.excel import ExcelLoader
+from .loaders.json import JsonLoader
+from .loaders.text import TextLoader
+from .loaders.xml import XmlLoader
 
 class Knead:
-    loaders = [JsonLoader, CsvLoader, TextLoader]
+    loaders = [CsvLoader, ExcelLoader, JsonLoader, TextLoader, XmlLoader]
 
     _data = None
 

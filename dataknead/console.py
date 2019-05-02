@@ -9,13 +9,19 @@ def has_extension(path):
     suffix = Path(path).suffix
     return suffix != ""
 
-def main():
+def get_parser():
     parser = ArgumentParser(
         description = "Fluently process and convert data formats like JSON and CSV"
     )
 
     parser.add_argument("input", type=str, nargs="?", help="Input file")
     parser.add_argument("output", type=str, nargs="?", help="Output file")
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help = "Show debug information"
+    )
     parser.add_argument("--input-format", "-if", type=str, help="Input format")
     parser.add_argument("--output-format", "-of", type=str, help="Output format")
     parser.add_argument(
@@ -24,8 +30,9 @@ def main():
         help="Take data from stdin (requires --input-format)",
     )
 
-    args = parser.parse_args()
+    return parser
 
+def main(args):
     if len(sys.argv) == 1:
         # No arguments, just display help
         parser.print_help()
@@ -66,7 +73,7 @@ def main():
     # Okay, now let's do some converting!
     # With no output, just print to stdout
     if not args.output:
-        k.print()
+        print(k)
     # Output file with output format, force that anyway
     elif args.output and args.output_format:
         k.write(args.output, write_as=args.output_format)
@@ -81,6 +88,11 @@ def main():
 
 def run():
     try:
-        main()
+        parser = get_parser()
+        args = parser.parse_args()
+        main(args)
     except Exception as e:
-        sys.exit(e)
+        if args.verbose:
+            raise(e)
+        else:
+            sys.exit(e)
