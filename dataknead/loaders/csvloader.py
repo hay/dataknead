@@ -1,5 +1,5 @@
 import csv
-from .baseloader import BaseLoader
+from dataknead.baseloader import BaseLoader
 
 class CsvLoader(BaseLoader):
     EXTENSION = "csv"

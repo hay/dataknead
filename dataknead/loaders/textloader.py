@@ -1,4 +1,4 @@
-from .baseloader import BaseLoader
+from dataknead.baseloader import BaseLoader
 
 class TextLoader(BaseLoader):
     EXTENSION = "txt"

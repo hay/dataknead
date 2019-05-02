@@ -212,7 +212,7 @@ Knead("cities.csv").map(mapcity).write("city-country-names.csv")
 ```
 
 ### `query(`*path*`)`
-Queries a `dict` by using a path, separated by slashes.
+Queries a `dict` by using the [`jq`](https://stedolan.github.io/jq/) syntax.
 
 ```python
 src = Knead({
@@ -221,7 +221,7 @@ src = Knead({
             "src" : "http://github.com/logo.png"
         }
     }
-}).query("image/full/src")
+}).query(".image.full.src")
 
 print(src) # 'http://github.com/logo.png'
 ```

@@ -1,5 +1,5 @@
 import json
-from .baseloader import BaseLoader
+from dataknead.baseloader import BaseLoader
 
 class JsonLoader(BaseLoader):
     EXTENSION = "json"

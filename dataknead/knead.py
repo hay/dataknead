@@ -2,9 +2,9 @@ import json
 from io import StringIO
 from jq import jq
 from pathlib import Path
-from .csvloader import CsvLoader
-from .jsonloader import JsonLoader
-from .textloader import TextLoader
+from .loaders.csvloader import CsvLoader
+from .loaders.jsonloader import JsonLoader
+from .loaders.textloader import TextLoader
 
 class Knead:
     loaders = [JsonLoader, CsvLoader, TextLoader]
