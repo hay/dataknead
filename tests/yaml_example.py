@@ -1,4 +1,4 @@
-from _context import dataknead
+from _context import dataknead # This line is only needed in test environments
 from dataknead import Knead, BaseLoader
 import yaml
 

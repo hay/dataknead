@@ -1,22 +1,11 @@
-# For this example you need to install the pandas, openpyxl, xlwt and xlrd libraries
 from _context import dataknead
-from dataknead import Knead, BaseLoader
-import pandas
+from dataknead import Knead
 
-class ExcelLoader(BaseLoader):
-    EXTENSION = ("xls", "xlsx")
+# Single sheet Excel
+print(Knead("input/cities.xlsx"))
 
-    @staticmethod
-    def read(f, **kwargs):
-        df =  pandas.read_excel(f.name, **kwargs)
-        return df.to_dict("records")
+# Multisheet Excel
+print(Knead("input/cities-multisheet.xlsx"))
 
-    @staticmethod
-    def write(f, data):
-        df = pandas.DataFrame(data)
-        df.to_excel(f.name)
-
-Knead.loaders.append(ExcelLoader)
-
-Knead("input/cities.xlsx").print()
+# Convert from CSV to XLS
 Knead("input/cities.csv").write("output/cities.xls")

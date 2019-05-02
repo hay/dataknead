@@ -1,20 +1,5 @@
 from _context import dataknead
-from dataknead import Knead, BaseLoader
-import xmltodict
-
-class XmlLoader(BaseLoader):
-    EXTENSION = "xml"
-
-    @staticmethod
-    def read(f):
-        return xmltodict.parse(f.read())
-
-    @staticmethod
-    def write(f, data, pretty = True):
-        xmldata = xmltodict.unparse(data, pretty = pretty)
-        f.write(xmldata)
-
-Knead.loaders.append(XmlLoader)
+from dataknead import Knead
 
 def parse(data):
     books = data["catalog"]["book"]
