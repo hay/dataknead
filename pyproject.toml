@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dataknead"
+version = "0.3.0-beta"
+description = "An intuitive Python 3 library for processing and converting data formats like JSON and CSV."
+authors = ["Hay Kranen <huskyr@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+xmltodict = "^0.12.0"
+jq = "^0.1.6"
+pandas = "^0.24.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
