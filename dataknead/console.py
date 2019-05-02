@@ -2,7 +2,7 @@
 from .knead import Knead
 from pathlib import Path
 from os.path import isfile
-import argparse
+from argparse import ArgumentParser
 import sys
 
 def has_extension(path):
@@ -10,21 +10,26 @@ def has_extension(path):
     return suffix != ""
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Process and convert text-based data formats like JSON and CSV"
+    parser = ArgumentParser(
+        description = "Fluently process and convert data formats like JSON and CSV"
     )
 
-    parser.add_argument('input', type=str, nargs="?", help="Input file")
-    parser.add_argument('output', type=str, nargs="?", help="Output file")
-    parser.add_argument('--input-format', '-if', type=str, help="Input format")
-    parser.add_argument('--output-format', '-of', type=str, help="Output format")
-    parser.add_argument('--stdin', action="store_true",
-        help="Take data from stdin (requires --input-format)"
+    parser.add_argument("input", type=str, nargs="?", help="Input file")
+    parser.add_argument("output", type=str, nargs="?", help="Output file")
+    parser.add_argument("--input-format", "-if", type=str, help="Input format")
+    parser.add_argument("--output-format", "-of", type=str, help="Output format")
+    parser.add_argument(
+        "--stdin",
+        action="store_true",
+        help="Take data from stdin (requires --input-format)",
     )
 
     args = parser.parse_args()
 
-    print(args)
+    if len(sys.argv) == 1:
+        # No arguments, just display help
+        parser.print_help()
+        sys.exit()
 
     # If there's no input *and* no --stdin, something is wrong
     if args.input == None and args.stdin == False:
@@ -42,7 +47,9 @@ def main():
     elif args.input != None and args.input_format == None:
         # Check if this file has an extension, and if not, give an error
         if not has_extension(args.input):
-            raise Exception("Input files need a file extension or the --input-format argument")
+            raise Exception(
+                "Input files need a file extension or the --input-format argument"
+            )
         # Does the file exist?
         elif not isfile(args.input):
             raise Exception("File does not exist: %s" % args.input)
@@ -68,7 +75,9 @@ def main():
         if has_extension(args.output):
             k.write(args.output)
         else:
-            raise Exception("Filenames without extension require the --output-format argument")
+            raise Exception(
+                "Filenames without extension require the --output-format argument"
+            )
 
 def run():
     try:

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "dataknead"
 version = "0.3.0-beta"
-description = "An intuitive Python 3 library for processing and converting data formats like JSON and CSV."
+description = "Fluently process and convert data formats like JSON and CSV"
 authors = ["Hay Kranen <huskyr@gmail.com>"]
 license = "MIT"
 
