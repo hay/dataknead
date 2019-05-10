@@ -1,6 +1,6 @@
 # dataknead
 
-An intuitive Python 3 library for processing and converting data formats like JSON and CSV.
+A fluid Python library and command line utility for processing and converting data formats like JSON and CSV.
 
 Have you ever sighed when writing code like this?
 
@@ -25,6 +25,14 @@ Now you can write it like this:
 from dataknead import Knead
 Knead("names.json").filter(lambda r:"John" in r["name"]).write("names.csv")
 ```
+
+Or what about simply converting `json` to `csv`? With `dataknead` you get the `knead` command line utility which makes things easy:
+
+```bash
+knead names.json names.csv
+```
+
+`dataknead` has inbuilt loaders for CSV, Excel, JSON and XML and you can easily write your own.
 
 ## Installation
 Install `dataknead` from [PyPi](https://pypi.python.org/pypi/dataknead)
@@ -107,6 +115,12 @@ Nice huh?
 
 ## Advanced example
 Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
+
+## Philosophy
+`dataknead` is intended for easy conversion between common data formats and basic manipulation. It's not ment as a replacement for more complex libraries like `pandas` or `numpy`.
+
+* Keep the API minimal and [fluent](https://en.wikipedia.org/wiki/Fluent_interface)
+* Don't reinvent the wheel: reuse as many modules and conventions as possible. The XML loader uses the excellent [`xmltodict`](https://github.com/martinblech/xmltodict) module. The [`query`](#querypath) method is a very thin wrapper around [`jq`](https://stedolan.github.io/jq/).
 
 ## API
 

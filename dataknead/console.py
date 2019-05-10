@@ -24,6 +24,9 @@ def get_parser():
     )
     parser.add_argument("--input-format", "-if", type=str, help="Input format")
     parser.add_argument("--output-format", "-of", type=str, help="Output format")
+    parser.add_argument("-q", "--query", type=str,
+        help = "Add a jq-compatible query for the loaded data"
+    )
     parser.add_argument(
         "--stdin",
         action="store_true",
@@ -64,6 +67,9 @@ def main(args):
             raise Exception("File does not exist: %s" % args.input)
         else:
             k = Knead(args.input, parse_as=args.input_format)
+
+    if args.query:
+        k = k.query(args.query)
 
     # Okay, now let's do some converting!
     # With no output, just print to stdout
