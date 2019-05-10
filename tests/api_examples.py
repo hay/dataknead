@@ -1,4 +1,3 @@
-from _context import dataknead
 from dataknead import Knead
 
 # Read data from file

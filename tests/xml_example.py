@@ -1,4 +1,3 @@
-from _context import dataknead
 from dataknead import Knead
 
 def parse(data):
