@@ -33,11 +33,6 @@ def get_parser():
     return parser
 
 def main(args):
-    if len(sys.argv) == 1:
-        # No arguments, just display help
-        parser.print_help()
-        sys.exit()
-
     # If there's no input *and* no --stdin, something is wrong
     if args.input == None and args.stdin == False:
         raise Exception("Need an input file or the --stdin argument")
@@ -89,8 +84,14 @@ def main(args):
 def run():
     try:
         parser = get_parser()
-        args = parser.parse_args()
-        main(args)
+
+        if len(sys.argv) == 1:
+            # No arguments, just display help
+            parser.print_help()
+            sys.exit()
+        else:
+            args = parser.parse_args()
+            main(args)
     except Exception as e:
         if args.verbose:
             raise(e)
