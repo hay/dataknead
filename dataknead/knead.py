@@ -27,9 +27,14 @@ class Knead:
     _loaders = {}
 
     def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
-        # Load default loaders
-        for loader in DEFAULT_LOADERS:
-            self.add_loader(loader)
+        # Load default loaders if there are none
+        if not self._loaders:
+            logging.debug(f"Loading default loaders: {DEFAULT_LOADERS}")
+
+            for loader in DEFAULT_LOADERS:
+                self.add_loader(loader)
+
+        logging.debug(f"Input: {inp}")
 
         if parse_as:
             # Process string like file
@@ -62,28 +67,21 @@ class Knead:
         logging.debug(f"Trying to find loader for extension '{extension}'")
 
         if extension in self._loaders:
+            logging.debug(f"Found loader for '{extension}'")
             return self._loaders[extension]
         else:
             raise KneadException(f"Could not find loader for extension '{extension}'")
 
     def add_loader(self, loader):
-        logging.debug(f"Adding loader {loader} for extensions {loader.EXTENSION}")
+        extension = loader.EXTENSION
+        logging.debug(f"Adding loader {loader} for extensions {extension}")
 
-        if isinstance(loader.EXTENSION, str):
-            extensions = [loader.EXTENSION]
+        if extension in self._loaders:
+            raise LoaderError(f"There is already a loader for extension '{extension}'")
         else:
-            extensions = [loader.EXTENSION]
-
-        for extension in extensions:
-            if extension in self._loaders:
-                raise LoaderError(f"There is already a loader for extension '{extension}'")
-            else:
-                self._loaders[extension] = loader
+            self._loaders[extension] = loader
 
     def apply(self, fn):
-        """
-        Runs a function over the data
-        """
         self._data = fn(self.data())
         return self
 
@@ -92,12 +90,12 @@ class Knead:
         datatype = type(self._data)
 
         if check_instance and not isinstance(self._data, check_instance):
-            raise Exception(
-                "Data of type %s can not be processed, needs to be %s" %
-                ( datatype.__name__, check_instance.__name__)
-            )
+            dtype = datatype.__name__
+            preftype = check_instance.__name__
 
-        return self._data
+            raise Exception(f"Data of type {dtype} can not be processed, needs to be {preftype}")
+        else:
+            return self._data
 
     def filter(self, fn):
         data = [row for row in self.data(check_instance = list) if fn(row)]
@@ -127,6 +125,8 @@ class Knead:
         return Knead(list(self.data().values()))
 
     def write(self, path, write_as = None, **kwargs):
+        logging.debug(f"write(): {path}")
+
         if not write_as:
             write_as = Path(path).suffix[1:]
 
@@ -134,3 +134,4 @@ class Knead:
 
         with open(path, "w") as f:
             loader.write(f, self.data(), **kwargs)
+            logging.debug(f"Wrote the data to {path}")
