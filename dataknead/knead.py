@@ -1,7 +1,6 @@
 import json
 import logging
 from io import StringIO
-from jq import jq
 from pathlib import Path
 from .loaders.csv import CsvLoader
 from .loaders.excel import ExcelLoader
@@ -9,7 +8,13 @@ from .loaders.json import JsonLoader
 from .loaders.text import TextLoader
 from .loaders.xml import XmlLoader
 
-DEFAULT_LOADERS = [CsvLoader, ExcelLoader, JsonLoader, TextLoader, XmlLoader]
+DEFAULT_LOADERS = [
+    CsvLoader,
+    ExcelLoader,
+    JsonLoader,
+    TextLoader,
+    XmlLoader
+]
 
 class KneadException(Exception):
     pass
@@ -22,12 +27,14 @@ class Knead:
     _loaders = {}
 
     def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
-        [self.add_loader(loader) for loader in DEFAULT_LOADERS]
+        # Load default loaders
+        for loader in DEFAULT_LOADERS:
+            self.add_loader(loader)
 
         if parse_as:
             # Process string like file
             if not isinstance(inp, str):
-                raise TypeError("Input needs to be string, not %s" % type(inp).__name__)
+                raise TypeError(f"Input needs to be string, not {type(inp).__name__}")
 
             loader = self._get_loader(parse_as)
             f = StringIO(inp)
@@ -115,26 +122,6 @@ class Knead:
             raise TypeError("Iteratee should be of type dict or function")
 
         return Knead(data)
-
-    # This is basically a wrapper around jq
-    def query(self, query, default = None):
-        try:
-            result = jq(query).transform(self.data(), multiple_output = True)
-        except:
-            return Knead(default, is_data = True)
-
-        # jq.py has this weird habit of not returning a list when there
-        # are multiple outputs, *however* when we set multiple_output = True,
-        # every result is a list, so we check here if the result is a list
-        # with just *one* item, and if so, just return the first item in that
-        # list
-        if (isinstance(result, list) and len(result) == 1):
-            result = result[0]
-
-        if not result and default:
-            return default
-        else:
-            return Knead(result, is_data = True)
 
     def values(self):
         return Knead(list(self.data().values()))

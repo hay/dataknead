@@ -230,21 +230,6 @@ Knead("cities.csv").map(mapcity).write("city-country-names.csv")
 
 ```
 
-### `query(`*path*`)`
-Queries a `dict` by using the [`jq`](https://stedolan.github.io/jq/) syntax.
-
-```python
-src = Knead({
-    "image" : {
-        "full" : {
-            "src" : "http://github.com/logo.png"
-        }
-    }
-}).query(".image.full.src")
-
-print(src) # 'http://github.com/logo.png'
-```
-
 ### `values()`
 Returns values of the data.
 
@@ -283,7 +268,7 @@ Licensed under the [MIT license](https://opensource.org/licenses/MIT).
 ## Release history
 
 ### 0.3
-* Breaking change:
+* Breaking change: removed the `query` method: `dataknead`'s focus is on conversion. Using `apply` you can easily use a tool like `jq` to query.
 
 ### 0.2
 * Adding tuple shortcut to `map` (#2)

@@ -1,14 +1,13 @@
 [tool.poetry]
 name = "dataknead"
 version = "0.3.0-beta"
-description = "Fluently process and convert data formats like JSON and CSV"
+description = "Fluently convert and transform data formats like JSON and CSV"
 authors = ["Hay Kranen <huskyr@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.6"
 xmltodict = "^0.12.0"
-jq = "^0.1.6"
 pandas = "^0.24.2"
 xlrd = "^1.2"
 xlwt = "^1.3"
