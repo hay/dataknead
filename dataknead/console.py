@@ -3,6 +3,7 @@ from .knead import Knead
 from pathlib import Path
 from os.path import isfile
 from argparse import ArgumentParser
+import logging
 import sys
 
 def has_extension(path):
@@ -36,6 +37,9 @@ def get_parser():
     return parser
 
 def main(args):
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
     # If there's no input *and* no --stdin, something is wrong
     if args.input == None and args.stdin == False:
         raise Exception("Need an input file or the --stdin argument")
@@ -88,18 +92,12 @@ def main(args):
             )
 
 def run():
-    try:
-        parser = get_parser()
+    parser = get_parser()
 
-        if len(sys.argv) == 1:
-            # No arguments, just display help
-            parser.print_help()
-            sys.exit()
-        else:
-            args = parser.parse_args()
-            main(args)
-    except Exception as e:
-        if args.verbose:
-            raise(e)
-        else:
-            sys.exit(e)
+    if len(sys.argv) == 1:
+        # No arguments, just display help
+        parser.print_help()
+        sys.exit()
+    else:
+        args = parser.parse_args()
+        main(args)

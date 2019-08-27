@@ -156,7 +156,12 @@ Some loaders might come with extra arguments. E.g. the `csv` loader has an optio
 Knead("cities.csv", has_header = True)
 ```
 
-The default loaders are for `csv`, `json` and `txt` files.
+### `add_loader(*loader*)`
+Add a new loader to the `Knead` instance. Read the section on [extending dataknead](#extending-dataknead) how to write your own loader.
+
+```python
+Knead.add_loader(YamlLoader)
+```
 
 ### `apply(`*fn*`)`
 Runs all data through a function.
@@ -276,6 +281,9 @@ Written by [Hay Kranen](https://www.haykranen.nl).
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Release history
+
+### 0.3
+* Breaking change:
 
 ### 0.2
 * Adding tuple shortcut to `map` (#2)

@@ -1,4 +1,7 @@
 from dataknead import Knead
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 # Convert csv to json
 Knead("input/cities.csv").write("output/cities.json")

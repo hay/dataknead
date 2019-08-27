@@ -1,4 +1,5 @@
 import json
+import logging
 from io import StringIO
 from jq import jq
 from pathlib import Path
@@ -8,12 +9,21 @@ from .loaders.json import JsonLoader
 from .loaders.text import TextLoader
 from .loaders.xml import XmlLoader
 
-class Knead:
-    loaders = [CsvLoader, ExcelLoader, JsonLoader, TextLoader, XmlLoader]
+DEFAULT_LOADERS = [CsvLoader, ExcelLoader, JsonLoader, TextLoader, XmlLoader]
 
+class KneadException(Exception):
+    pass
+
+class LoaderError(Exception):
+    pass
+
+class Knead:
     _data = None
+    _loaders = {}
 
     def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
+        [self.add_loader(loader) for loader in DEFAULT_LOADERS]
+
         if parse_as:
             # Process string like file
             if not isinstance(inp, str):
@@ -42,11 +52,26 @@ class Knead:
         return json.dumps(self.data(), indent = 4)
 
     def _get_loader(self, extension):
-        for loader in self.loaders:
-            if extension in loader.EXTENSION:
-                return loader
+        logging.debug(f"Trying to find loader for extension '{extension}'")
 
-        raise Exception("Could not find loader for type '%s'" % extension)
+        if extension in self._loaders:
+            return self._loaders[extension]
+        else:
+            raise KneadException(f"Could not find loader for extension '{extension}'")
+
+    def add_loader(self, loader):
+        logging.debug(f"Adding loader {loader} for extensions {loader.EXTENSION}")
+
+        if isinstance(loader.EXTENSION, str):
+            extensions = [loader.EXTENSION]
+        else:
+            extensions = [loader.EXTENSION]
+
+        for extension in extensions:
+            if extension in self._loaders:
+                raise LoaderError(f"There is already a loader for extension '{extension}'")
+            else:
+                self._loaders[extension] = loader
 
     def apply(self, fn):
         """
