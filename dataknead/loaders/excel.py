@@ -1,7 +1,7 @@
 from dataknead.baseloader import BaseLoader
 
 class ExcelLoader(BaseLoader):
-    EXTENSION = ("xls", "xlsx")
+    EXTENSIONS = ["xls", "xlsx"]
 
     @staticmethod
     def read(f, **kwargs):

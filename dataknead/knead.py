@@ -16,6 +16,19 @@ DEFAULT_LOADERS = [
     XmlLoader
 ]
 
+# FIXME: this can be done more elegant
+def add_loader(loaders, loader):
+    extensions = loader.EXTENSIONS
+    logging.debug(f"Adding loader {loader} for extensions {extensions}")
+
+    for extension in extensions:
+        if extension in loaders:
+            raise LoaderError(f"There is already a loader for extension '{extension}'")
+        else:
+            loaders[extension] = loader
+
+    return loaders
+
 class KneadException(Exception):
     pass
 
@@ -26,14 +39,10 @@ class Knead:
     _data = None
     _loaders = {}
 
+    for loader in DEFAULT_LOADERS:
+        add_loader(_loaders, loader)
+
     def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
-        # Load default loaders if there are none
-        if not self._loaders:
-            logging.debug(f"Loading default loaders: {DEFAULT_LOADERS}")
-
-            for loader in DEFAULT_LOADERS:
-                self.add_loader(loader)
-
         logging.debug(f"Input: {inp}")
 
         if parse_as:
@@ -73,13 +82,7 @@ class Knead:
             raise KneadException(f"Could not find loader for extension '{extension}'")
 
     def add_loader(self, loader):
-        extension = loader.EXTENSION
-        logging.debug(f"Adding loader {loader} for extensions {extension}")
-
-        if extension in self._loaders:
-            raise LoaderError(f"There is already a loader for extension '{extension}'")
-        else:
-            self._loaders[extension] = loader
+        add_loader(self._loaders, loader)
 
     def apply(self, fn):
         self._data = fn(self.data())

@@ -1,7 +1,7 @@
 from dataknead.baseloader import BaseLoader
 
 class TextLoader(BaseLoader):
-    EXTENSION = "txt"
+    EXTENSIONS = ["txt"]
 
     @staticmethod
     def read(f):

@@ -2,7 +2,7 @@ from dataknead.baseloader import BaseLoader
 import json
 
 class JsonLoader(BaseLoader):
-    EXTENSION = "json"
+    EXTENSIONS = ["json"]
 
     @staticmethod
     def read(f):

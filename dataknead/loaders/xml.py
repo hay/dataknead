@@ -2,7 +2,7 @@ from dataknead.baseloader import BaseLoader
 import xmltodict
 
 class XmlLoader(BaseLoader):
-    EXTENSION = "xml"
+    EXTENSIONS = ["xml"]
 
     @staticmethod
     def read(f):

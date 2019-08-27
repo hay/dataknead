@@ -1,8 +1,12 @@
 from dataknead import Knead, BaseLoader
 import yaml
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
 
 class YamlLoader(BaseLoader):
-    EXTENSION = "yaml"
+    EXTENSIONS = ["yaml"]
 
     @staticmethod
     def read(f):
@@ -13,6 +17,6 @@ class YamlLoader(BaseLoader):
         yamldata = yaml.dump(data)
         f.write(yamldata)
 
-Knead.loaders.append(YamlLoader)
+Knead.add_loader(Knead, YamlLoader)
 
 Knead("input/example.yaml").write("output/example.json", indent = 4)

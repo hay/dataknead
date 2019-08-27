@@ -2,7 +2,7 @@ from dataknead.baseloader import BaseLoader
 import csv
 
 class CsvLoader(BaseLoader):
-    EXTENSION = "csv"
+    EXTENSIONS = ["csv"]
 
     @staticmethod
     def read(f, has_header = None):
