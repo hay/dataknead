@@ -1,5 +1,23 @@
-from dataknead import Knead
+from dataknead import Knead as BaseKnead
 from itertools import chain
+from jq import jq
+import logging
+
+#  logging.basicConfig(level=logging.DEBUG)
+
+# We monkey patch 'Knead' to have a 'query' method that uses `jq` for
+# querying
+class Knead(BaseKnead):
+    def query(self, query):
+        try:
+            result = jq(query).transform(self.data(), multiple_output = True)
+        except:
+            return Knead(None, is_data = True)
+
+        if (isinstance(result, list) and len(result) == 1):
+            result = result[0]
+
+        return Knead(result, is_data = True)
 
 # Read json file
 entity = Knead("input/entity.json")
