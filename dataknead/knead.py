@@ -135,6 +135,6 @@ class Knead:
 
         loader = self._get_loader(write_as)
 
-        with open(path, "w") as f:
+        with open(path, "w", newline='') as f:
             loader.write(f, self.data(), **kwargs)
             logging.debug(f"Wrote the data to {path}")
