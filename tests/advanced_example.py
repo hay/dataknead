@@ -1,3 +1,12 @@
+"""
+This advanced example takes a complex JSON file, the result from the Wikidata
+API for the movie Blade Runner, and shows you how to transform this to many
+different formats.
+
+You can get the original data using this API call:
+https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q184843&format=json
+"""
+
 from dataknead import Knead as BaseKnead
 from itertools import chain
 from jq import jq
