@@ -1,6 +1,6 @@
 # dataknead
 
-A fluid Python library and command line utility for processing and converting data formats like JSON and CSV.
+A fluid Python library and command line utility for processing and converting between data formats like JSON and CSV.
 
 Have you ever sighed when writing code like this?
 
@@ -46,8 +46,6 @@ Then import
 ```python
 from dataknead import Knead
 ```
-
-Note that `dataknead` is Python 3-only.
 
 ## Basic example
 
@@ -117,10 +115,11 @@ Nice huh?
 Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
 
 ## Philosophy
-`dataknead` is intended for easy conversion between common data formats and basic manipulation. It's not ment as a replacement for more complex libraries like `pandas` or `numpy`.
+`dataknead` is intended for easy conversion between common data formats and basic manipulation. It's not a replacement for more complex libraries like `pandas` or `numpy`,but instead can be a useful addition to those libraries.
 
-* Keep the API minimal and [fluent](https://en.wikipedia.org/wiki/Fluent_interface)
-* Don't reinvent the wheel: reuse as many modules and conventions as possible. The XML loader uses the excellent [`xmltodict`](https://github.com/martinblech/xmltodict) module. The [`query`](#querypath) method is a very thin wrapper around [`jq`](https://stedolan.github.io/jq/).
+The API is as minimal as possible and [fluent](https://en.wikipedia.org/wiki/Fluent_interface).
+
+I try to use as many existing and well-tested libraries as possbile For example, the XML loader uses the excellent [`xmltodict`](https://github.com/martinblech/xmltodict) module.
 
 ## API
 
@@ -157,7 +156,7 @@ Knead("cities.csv", has_header = True)
 ```
 
 ### `add_loader(*loader*)`
-Add a new loader to the `Knead` instance. Read the section on [extending dataknead](#extending-dataknead) how to write your own loader.
+Add a new loader to the `Knead` instance. Read the section on [extending dataknead](#extending-dataknead) on how to write your own loader.
 
 ```python
 Knead.add_loader(YamlLoader)
@@ -175,7 +174,7 @@ Returns the parsed data.
 data = Knead("cities.csv").data()
 ```
 
-To raise an exception for an invalid instance, pass that to `check_instance`
+To raise an exception for an invalid instance, pass that to `check_instance`.
 ```python
 data = Knead("cities.csv").data(check_instance = dict)
 ```
@@ -251,10 +250,7 @@ Knead("cities.csv").map("city").write("ciites.csv", fieldnames=["city"])
 ```
 
 ## Extending dataknead
-You can write your own loaders to read and write other formats than the default ones (`csv`, `json` and `txt`). For an example take a look at the [YAML example](https://github.com/hay/dataknead/blob/master/tests/yaml_example.py).
-
-## Performance
-Performance drawbacks should be negligible. See [this small performance test](https://github.com/hay/dataknead/blob/master/tests/performance_test.py).
+You can write your own loaders to read and write other formats than the default ones. For an example take a look at the [YAML example](https://github.com/hay/dataknead/blob/master/tests/yaml_example.py).
 
 ## Remarks
 * Note that `dataknead` is Python 3-only.
@@ -268,7 +264,7 @@ Licensed under the [MIT license](https://opensource.org/licenses/MIT).
 ## Release history
 
 ### 0.3
-* Breaking change: removed the `query` method: `dataknead`'s focus is on conversion. Using `apply` you can easily use a tool like `jq` to query.
+* Breaking change: removed the `query` method: the focus of `dataknead` is on conversion. Using `apply` you can easily use a tool like `jq` to query.
 
 ### 0.2
 * Adding tuple shortcut to `map` (#2)
