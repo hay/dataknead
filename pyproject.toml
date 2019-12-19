@@ -1,19 +1,20 @@
 [tool.poetry]
 name = "dataknead"
 version = "0.3.0-beta"
-description = "Fluently convert and transform data formats like JSON and CSV"
+description = "A fluid Python library and command line utility for processing and converting between data formats like JSON and CSV."
 authors = ["Hay Kranen <huskyr@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.6"
-xmltodict = "^0.12.0"
 pandas = "^0.24.2"
+python = "^3.6"
+pyyaml = "^5.1"
 xlrd = "^1.2"
 xlwt = "^1.3"
-pyyaml = "^5.1"
+xmltodict = "^0.12.0"
 
 [tool.poetry.dev-dependencies]
+jq = "^0.1.6"
 
 [tool.poetry.scripts]
 knead = "dataknead.console:run"

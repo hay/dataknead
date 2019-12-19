@@ -1,5 +1,4 @@
 .python-version
-poetry.lock
 build
 dist
 __pycache__
