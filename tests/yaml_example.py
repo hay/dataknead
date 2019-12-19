@@ -4,7 +4,6 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-
 class YamlLoader(BaseLoader):
     EXTENSIONS = ["yaml"]
 
