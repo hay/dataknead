@@ -1,6 +1,6 @@
 # dataknead
 
-A fluid Python library and command line utility for processing and converting between data formats like JSON and CSV.
+A fluid Python library and command line utility for processing and converting between common data formats like JSON and CSV.
 
 Have you ever sighed when writing code like this?
 
@@ -47,9 +47,9 @@ Then import
 from dataknead import Knead
 ```
 
-## Basic example
+## Basic example and tutorial
 
-Let's say you have a small CSV file with cities called `cities.csv`.
+Let's say you have a small CSV file with cities and their population called `cities.csv`.
 
 ```csv
 city,country,population
@@ -112,14 +112,42 @@ Venice,it,265000
 Nice huh?
 
 ## Advanced example
-Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py).
+Check out [the advanced example](https://github.com/hay/dataknead/blob/master/tests/advanced_example.py). This also shows you how to do more complex data manipulation using external libraries like [jq](https://stedolan.github.io/jq/).
 
 ## Philosophy
-`dataknead` is intended for easy conversion between common data formats and basic manipulation. It's not a replacement for more complex libraries like `pandas` or `numpy`,but instead can be a useful addition to those libraries.
+`dataknead` is intended for easy conversion between common data formats and basic manipulation. It's not a replacement for more complex libraries like `pandas` or `numpy`, but instead can be a useful addition to those libraries.
 
 The API is as minimal as possible and [fluent](https://en.wikipedia.org/wiki/Fluent_interface).
 
-I try to use as many existing and well-tested libraries as possbile For example, the XML loader uses the excellent [`xmltodict`](https://github.com/martinblech/xmltodict) module.
+I try to use as many existing and well-tested libraries as possible. For example, the XML loader uses the excellent [`xmltodict`](https://github.com/martinblech/xmltodict) module.
+
+## Command line utility (`knead`)
+
+`dataknead` includes the `knead` command line utility you can use for simple conversion of data formats.
+
+    knead cities.csv cities.json
+
+Will transform a filed called `cities.csv` to a file called `cities.json` and is equivalent to this piece of Python code
+
+    Knead("cities.csv").write("cities.json")
+
+`knead` can also be used as a quick way of viewing the contents of a file, just give it an input file
+
+    knead cities.csv
+
+This is equivalant to
+
+    print(Knead("cities.csv").data())
+
+You can also specify the input and output formats, when those are not deducable using the file extension, or if you want to overwrite them. This is useful in combination with the `--stdin` option, which allows you to take data from stdin and directly transform output from a HTTP API to something else.
+
+For example, this API request gives you back a JSON summary of the article for Amsterdam on the English Wikipedia.
+
+    curl https://en.wikipedia.org/api/rest_v1/page/summary/Amsterdam
+
+Piping that into dataknead using --stdin and -if json gives you a nicely formatted file
+
+    curl https://en.wikipedia.org/api/rest_v1/page/summary/Amsterdam | knead --stdin -if json
 
 ## API
 
@@ -260,6 +288,29 @@ Written by [Hay Kranen](https://www.haykranen.nl).
 
 ## License
 Licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Development information
+If you want to work on `dataknead` follow these steps
+
+Clone the repo
+
+    git clone https://github.com/hay/dataknead
+
+And use [Poetry](https://python-poetry.org/) to install dependencies
+
+    poetry install
+
+Or alternatively
+
+    pip install pandas pyyaml xlrd xlwt xmltodict
+
+You might need to install a couple of dependencies beforehand
+
+    pip install wheel
+
+And (depending on your OS) some other deps too. For Debian / Ubuntu try
+
+    apt install build-essential autoconf libtool automake
 
 ## Release history
 
