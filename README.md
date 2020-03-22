@@ -139,7 +139,7 @@ This is equivalant to
 
     print(Knead("cities.csv").data())
 
-You can also specify the input and output formats, when those are not deducable using the file extension, or if you want to overwrite them. This is useful in combination with the `--stdin` option, which allows you to take data from stdin and directly transform output from a HTTP API to something else.
+You can also specify the input and output formats, when those are not available in the file extension, or if you want to overwrite them. This is useful in combination with the `--stdin` option, which allows you to take data from stdin and directly transform output from a HTTP API to something else.
 
 For example, this API request gives you back a JSON summary of the article for Amsterdam on the English Wikipedia.
 
