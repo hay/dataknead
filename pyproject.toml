@@ -4,6 +4,10 @@ version = "0.3.0"
 description = "A fluid Python library and command line utility for processing and converting between data formats like JSON and CSV."
 authors = ["Hay Kranen <huskyr@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+repository = "https://github.com/hay/dataknead"
+homepage = "https://github.com/hay/dataknead"
+keywords = ["data", "json", "csv", "datascience", "conversion"]
 
 [tool.poetry.dependencies]
 pandas = "^0.24.2"
@@ -12,6 +16,7 @@ pyyaml = "^5.1"
 xlrd = "^1.2"
 xlwt = "^1.3"
 xmltodict = "^0.12.0"
+openpyxl = "^3.0.3"
 
 [tool.poetry.dev-dependencies]
 jq = "^0.1.6"
