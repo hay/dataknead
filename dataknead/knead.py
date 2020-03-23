@@ -8,6 +8,8 @@ from .loaders.json import JsonLoader
 from .loaders.text import TextLoader
 from .loaders.xml import XmlLoader
 
+logger = logging.getLogger(__name__)
+
 DEFAULT_LOADERS = [
     CsvLoader,
     ExcelLoader,
@@ -19,7 +21,7 @@ DEFAULT_LOADERS = [
 # FIXME: this can be done more elegant
 def add_loader(loaders, loader):
     extensions = loader.EXTENSIONS
-    logging.debug(f"Adding loader {loader} for extensions {extensions}")
+    logger.debug(f"Adding loader {loader} for extensions {extensions}")
 
     for extension in extensions:
         if extension in loaders:
@@ -43,7 +45,7 @@ class Knead:
         add_loader(_loaders, loader)
 
     def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
-        logging.debug(f"Input: {inp}")
+        logger.debug(f"Input: {inp}")
 
         if parse_as:
             # Process string like file
@@ -73,10 +75,10 @@ class Knead:
         return json.dumps(self.data(), indent = 4)
 
     def _get_loader(self, extension):
-        logging.debug(f"Trying to find loader for extension '{extension}'")
+        logger.debug(f"Trying to find loader for extension '{extension}'")
 
         if extension in self._loaders:
-            logging.debug(f"Found loader for '{extension}'")
+            logger.debug(f"Found loader for '{extension}'")
             return self._loaders[extension]
         else:
             raise KneadException(f"Could not find loader for extension '{extension}'")
@@ -128,7 +130,7 @@ class Knead:
         return Knead(list(self.data().values()))
 
     def write(self, path, write_as = None, **kwargs):
-        logging.debug(f"write(): {path}")
+        logger.debug(f"write(): {path}")
 
         if not write_as:
             write_as = Path(path).suffix[1:]
@@ -137,4 +139,4 @@ class Knead:
 
         with open(path, "w") as f:
             loader.write(f, self.data(), **kwargs)
-            logging.debug(f"Wrote the data to {path}")
+            logger.debug(f"Wrote the data to {path}")
