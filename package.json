@@ -4,6 +4,7 @@
     "dev-docs": "parcel docs-src/index.html"
   },
   "devDependencies": {
+    "highlight.js": "^10.3.1",
     "marked": "^0.8.0",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.26.3",

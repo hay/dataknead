@@ -215,7 +215,7 @@ Run a function over the data and only keep the elements that return `True` in th
 ```python
 Knead("cities.csv").filter(lambda city:city["country"] == "it").write("cities-italy.csv")
 
-# Or do this
+"""Or do this"""
 def is_italian(city):
     return city["country"]  == "it"
 
@@ -235,7 +235,7 @@ To return one key in every item, you can pass a string as a shortcut:
 ```python
 Knead("cities.csv").map("city").write("city-names.csv")
 
-# Is the same as
+"""Is the same as"""
 
 Knead("cities.csv").map(lambda c:c["city"]).write("city-names.csv")
 ```
@@ -244,11 +244,11 @@ To return multiple keys with values, you can use a tuple:
 ```python
 Knead("cities.csv").map(("city", "country")).write("city-country-names.csv")
 
-# Is the same as
+"""Is the same as"""
 
 Knead("cities.csv").map(lambda c:{ "city" : c["city"], "country" : c["country"] }).write("city-country-names.csv")
 
-# Or
+"""Or"""
 
 def mapcity(city):
     return {
