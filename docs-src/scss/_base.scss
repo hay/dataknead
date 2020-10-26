@@ -1,0 +1,50 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.8rem;
+    background: $c-1;
+}
+
+main {
+    background: white;
+    max-width: 80rem;
+    padding: 3rem 1rem;
+    @include margin-center;
+    @include child-margins;
+}
+
+h1 {
+    text-align: center;
+    color: $c-1;
+    font-size: 6rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+h3 {
+    font-weight: normal;
+}
+
+ul {
+    margin-left: 3rem;
+}
+
+// These two rules are a bit of a dirty hack for styling the header, but oh well
+main > p:nth-of-type(1) {
+    margin-top: 0;
+    font-size: 3rem;
+    text-align: center;
+}
+
+main > p:nth-of-type(2),
+main > p:nth-of-type(3) {
+    text-align: center;
+}
+
+pre {
+    background: $c-2;
+    padding: 1rem;
+    font-size: 1.6rem;
+    overflow-x: auto;
+}

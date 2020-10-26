@@ -1,6 +1,9 @@
 # dataknead
+**Effortless conversion between data formats like JSON, XML and CSV**
 
-A fluid Python library and command line utility for processing and converting between common data formats like JSON and CSV.
+[**Source on Github**](https://github.com/hay/dataknead)
+
+**dataknead** is a fluid Python library and command line utility for processing and converting between common data formats like JSON and CSV.
 
 Have you ever sighed when writing code like this?
 
