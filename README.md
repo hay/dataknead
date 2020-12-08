@@ -317,6 +317,10 @@ And (depending on your OS) some other deps too. For Debian / Ubuntu try
 
 ## Release history
 
+### 0.4
+* Upgraded some dependencies, including Pandas to >1.1. `dataknead` now requires Python 3.6.1 or higher.
+* Added a TOML loader.
+
 ### 0.3
 * Breaking change: removed the `query` method: the focus of `dataknead` is on conversion. Using `apply` you can easily use a tool like `jq` to query.
 

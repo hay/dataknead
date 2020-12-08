@@ -6,6 +6,7 @@ from .loaders.csv import CsvLoader
 from .loaders.excel import ExcelLoader
 from .loaders.json import JsonLoader
 from .loaders.text import TextLoader
+from .loaders.toml import TomlLoader
 from .loaders.xml import XmlLoader
 
 logger = logging.getLogger(__name__)
@@ -15,6 +16,7 @@ DEFAULT_LOADERS = [
     ExcelLoader,
     JsonLoader,
     TextLoader,
+    TomlLoader,
     XmlLoader
 ]
 
@@ -89,7 +91,6 @@ class Knead:
     def apply(self, fn):
         self._data = fn(self.data())
         return self
-
 
     def data(self, check_instance = None):
         datatype = type(self._data)

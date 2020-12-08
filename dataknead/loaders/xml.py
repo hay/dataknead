@@ -9,6 +9,6 @@ class XmlLoader(BaseLoader):
         return xmltodict.parse(f.read())
 
     @staticmethod
-    def write(f, data, pretty = True):
-        xmldata = xmltodict.unparse(data, pretty = pretty)
+    def write(f, data, **kwargs):
+        xmldata = xmltodict.unparse(data, **kwargs)
         f.write(xmldata)

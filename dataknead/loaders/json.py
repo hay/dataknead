@@ -10,6 +10,6 @@ class JsonLoader(BaseLoader):
         return json.loads(data)
 
     @staticmethod
-    def write(f, data, indent = None):
-        jsondata = json.dumps(data, indent = indent)
+    def write(f, data, **kwargs):
+        jsondata = json.dumps(data, **kwargs)
         f.write(jsondata)
