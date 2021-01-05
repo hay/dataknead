@@ -2,11 +2,11 @@
 name = "dataknead"
 version = "0.4.0"
 description = "Fluent conversion between data formats like JSON, XML and CSV"
-authors = ["Hay Kranen <www.haykranen.nl>"]
+authors = ["Hay Kranen"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/hay/dataknead"
-homepage = "https://github.com/hay/dataknead"
+homepage = "https://hay.github.io/dataknead/"
 keywords = ["data", "json", "csv", "datascience", "conversion"]
 
 [tool.poetry.dependencies]
