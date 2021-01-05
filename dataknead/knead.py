@@ -135,7 +135,7 @@ class Knead:
 
     def add_loader(self, loader):
         """
-        Adds a custom loader. See the `YAML loader <https://github.com/hay/dataknead/blob/master/tests/yaml_example.py>`_ for an example.
+        Adds a custom loader. See :ref:`extending dataknead <extending>`.
         """
         add_loader(self._loaders, loader)
 

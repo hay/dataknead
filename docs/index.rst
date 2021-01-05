@@ -2,45 +2,36 @@ dataknead
 =========
 **Fluent conversion between data formats like JSON, XML and CSV**
 
-.. toctree::
-   :hidden:
-   :maxdepth: 1
-
-   api
-   cli
-   dev-info
-   release-history
-   Source on Github <https://github.com/hay/dataknead>
-
-Have you ever sighed when writing code like this?
+Ever sighed when you wrote code to convert CSV to JSON for the thousandth time?
 
 ::
 
     import csv
     import json
 
-    with open("names.json") as f:
-        data = json.loads(f.read())
+    data = []
 
-    data = [row["name"] for row in data if "John" in row["name"]]
+    with open("cities.csv") as f:
+        reader = csv.DictReader(f)
 
-    with open("names.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(["name"])
-        [writer.writerow([row]) for row in data]
+        for row in reader:
+            data.append(row)
 
-Now you can write it like this:
+    with open("cities.json", "w") as f:
+        json.dump(data, f)
+
+Stop sighing and use ``dataknead``:
 
 ::
 
     from dataknead import Knead
-    Knead("names.json").filter(lambda r:"John" in r["name"]).write("names.csv")
+    Knead("cities.csv").write("cities.json")
 
-Or what about simply converting ``json`` to ``csv``? With ``dataknead`` you get the ``knead`` command line utility which makes things easy:
+Or make it even easier on the command line:
 
 ::
 
-    knead names.json names.csv
+    knead cities.csv cities.json
 
 ``dataknead`` has inbuilt loaders for CSV, Excel, JSON, TOML and XML and you can easily write your own.
 
@@ -138,9 +129,17 @@ Advanced example
 ----------------
 Check out `the advanced example <https://github.com/hay/dataknead/blob/master/tests/advanced_example.py>`_. This also shows you how to do more complex data manipulation using external libraries like `jq <https://stedolan.github.io/jq/>`_.
 
-Extending dataknead
--------------------
-You can write your own loaders to read and write other formats than the default ones. For an example take a look at the `YAML example <https://github.com/hay/dataknead/blob/master/tests/yaml_example.py>`_.
+More documentation
+------------------
+.. toctree::
+   :maxdepth: 1
+
+   api
+   cli
+   extending
+   dev-info
+   release-history
+   Source on Github <https://github.com/hay/dataknead>
 
 Credits
 -------

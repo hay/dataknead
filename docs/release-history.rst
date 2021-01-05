@@ -3,6 +3,7 @@ Release history
 
 0.4
 ---
+* Spiffy new website using Sphinx and the `Furo theme <https://github.com/pradyunsg/furo>`_.
 * Upgraded dependencies, ``dataknead`` now requires Python 3.6.1 or higher
 * Added a TOML loader.
 * Completely rewrote the Excel loader so we can remove the depedency on ``pandas``. Removed support for the legacy ``xls`` format, only ``xlsx`` is supported. This fixes #14.

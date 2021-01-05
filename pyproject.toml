@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "dataknead"
 version = "0.4.0"
-description = "A fluid Python library and command line utility for processing and converting between data formats like JSON and CSV."
+description = "Fluent conversion between data formats like JSON, XML and CSV"
 authors = ["Hay Kranen <www.haykranen.nl>"]
 license = "MIT"
 readme = "README.md"

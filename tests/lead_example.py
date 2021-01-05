@@ -3,18 +3,19 @@ import csv
 import json
 
 def vanilla():
-    with open("input/names.json") as f:
-        data = json.loads(f.read())
+    data = []
 
-    data = [row["name"] for row in data if "John" in row["name"]]
+    with open("input/cities.csv") as f:
+        reader = csv.DictReader(f)
 
-    with open("output/names-vanilla.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(["name"])
-        [writer.writerow([row]) for row in data]
+        for row in reader:
+            data.append(row)
+
+    with open("output/lead-cities-vanilla.json", "w") as f:
+        json.dump(data, f)
 
 def knead():
-    Knead("input/names.json").filter(lambda r:"John" in r["name"]).write("output/names-knead.csv")
+    Knead("input/cities.csv").write("output/lead-cities-knead.json")
 
 if __name__ == "__main__":
     vanilla()
