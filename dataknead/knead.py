@@ -47,6 +47,9 @@ class Knead:
         add_loader(_loaders, loader)
 
     def __init__(self, inp, parse_as = None, read_as = None, is_data = False, **kwargs):
+        """
+        Creates a new ``Knead`` instance
+        """
         logger.debug(f"Input: {inp}")
 
         if parse_as:
@@ -89,6 +92,9 @@ class Knead:
         add_loader(self._loaders, loader)
 
     def apply(self, fn):
+        """
+        This applies a
+        """
         self._data = fn(self.data())
         return self
 

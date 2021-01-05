@@ -5,4 +5,4 @@
 __pycache__
 build
 dist
-node_modules
+docs/_build
