@@ -1,3 +1,4 @@
+from .util import get_fieldnames, sniff_type, SnifferType
 from dataknead.baseloader import BaseLoader
 import csv
 
@@ -33,21 +34,21 @@ class CsvLoader(BaseLoader):
         if (not isinstance(data, list)) and (not isinstance(data, dict)):
             raise TypeError("Can't write type '%s' to csv" % type(data).__name__)
 
+        data_type = sniff_type(data)
+
         # Four ways to write data to a CSV file :)
-        if all([isinstance(i, dict) for i in data]):
+        if data_type == SnifferType.list_with_dicts:
             # List with dictionaries saved as a file with a header
 
             # First extract all the fieldnames from the list
             if not fieldnames:
-                fieldnames = set()
-                for item in data:
-                    [fieldnames.add(key) for key in item.keys()]
+                fieldnames = get_fieldnames(data)
 
             # Then open the CSV file and write
             writer = csv.DictWriter(f, fieldnames = fieldnames)
             writer.writeheader()
             [writer.writerow(row) for row in data]
-        elif all([isinstance(i, list) for i in data]):
+        elif data_type == SnifferType.list_with_lists:
             # A list with lists
             writer = csv.writer(f)
 
@@ -55,7 +56,7 @@ class CsvLoader(BaseLoader):
                 writer.writerow(fieldnames)
 
             [writer.writerow(row) for row in data]
-        elif isinstance(data, list):
+        elif data_type == SnifferType.single_list:
             # Just one single column
             writer = csv.writer(f)
 
@@ -63,7 +64,7 @@ class CsvLoader(BaseLoader):
                 writer.writerow(fieldnames)
 
             [writer.writerow([row]) for row in data]
-        elif isinstance(data, dict):
+        elif data_type == SnifferType.single_dict:
             # Only a header and one row
             writer = csv.writer(f)
             writer.writerow(data.keys())

@@ -1,13 +1,13 @@
 from dataknead import Knead
 
 # Print single sheet Excel
-print(Knead("input/cities.xlsx"))
+Knead("input/cities.xlsx").write("output/cities-excel.csv")
 
 # Print multisheet Excel
-print(Knead("input/cities-multisheet.xlsx"))
+Knead("input/cities-multisheet.xlsx").write("output/cities-multisheet-excel.json", indent = 4)
 
 # Print multisheet Excel and use the header for dict keys
-print(Knead("input/cities-multisheet.xlsx", has_header = True))
+Knead("input/cities-multisheet.xlsx", has_header = True).write("output/cities-multisheet-excel-header.json", indent = 4)
 
 # Convert from CSV to XLSX
 Knead("input/cities.csv").write("output/cities.xlsx")
