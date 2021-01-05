@@ -1,5 +1,5 @@
-Command line utility (``knead``)
-================================
+Command line utility
+====================
 
 ``dataknead`` includes the ``knead`` command line utility you can use for simple conversion of data formats.
 

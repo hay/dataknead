@@ -1,16 +1,16 @@
-.. dataknead documentation master file, created by
-   sphinx-quickstart on Tue Jan  5 16:30:47 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 dataknead
 =========
 **Fluent conversion between data formats like JSON, XML and CSV**
 
-`source on Github <https://github.com/hay/dataknead>`_
-
 .. toctree::
    :hidden:
+   :maxdepth: 1
+
+   api
+   cli
+   dev-info
+   release-history
+   Source on Github <https://github.com/hay/dataknead>
 
 Have you ever sighed when writing code like this?
 
@@ -42,7 +42,7 @@ Or what about simply converting ``json`` to ``csv``? With ``dataknead`` you get 
 
     knead names.json names.csv
 
-``dataknead`` has inbuilt loaders for CSV, Excel, JSON and XML and you can easily write your own.
+``dataknead`` has inbuilt loaders for CSV, Excel, JSON, TOML and XML and you can easily write your own.
 
 Philosophy
 ----------
@@ -50,7 +50,7 @@ Philosophy
 
 The API is as minimal as possible and `fluent <https://en.wikipedia.org/wiki/Fluent_interface>`_.
 
-I try to use as many existing and well-tested libraries as possible. For example, the XML loader uses the excellent `xmltodict <https://github.com/martinblech/xmltodict>`_ module.
+The loaders for the different file formats are built upon existing and well-tested libraries like `xmltodict <https://github.com/martinblech/xmltodict>`_ and `openpyxl <https://openpyxl.readthedocs.io/en/stable/index.html>`_.
 
 Installation
 ------------
@@ -141,17 +141,6 @@ Check out `the advanced example <https://github.com/hay/dataknead/blob/master/te
 Extending dataknead
 -------------------
 You can write your own loaders to read and write other formats than the default ones. For an example take a look at the `YAML example <https://github.com/hay/dataknead/blob/master/tests/yaml_example.py>`_.
-
-Other pages
------------
-
-.. toctree::
-   :maxdepth: 1
-
-   api
-   cli
-   dev-info
-   release-history
 
 Credits
 -------
