@@ -5,7 +5,9 @@
 
 dataknead
 =========
-**Effortless conversion between data formats like JSON, XML and CSV**
+**Fluent conversion between data formats like JSON, XML and CSV**
+
+`source on Github <https://github.com/hay/dataknead>`_
 
 .. toctree::
    :hidden:
@@ -130,6 +132,8 @@ This gives you this:
 
 Nice huh?
 
+For a full list of all available options see the :ref:`API documentation <api>`.
+
 Advanced example
 ----------------
 Check out `the advanced example <https://github.com/hay/dataknead/blob/master/tests/advanced_example.py>`_. This also shows you how to do more complex data manipulation using external libraries like `jq <https://stedolan.github.io/jq/>`_.
@@ -144,14 +148,18 @@ Other pages
 .. toctree::
    :maxdepth: 1
 
-   cli
    api
+   cli
    dev-info
    release-history
 
 Credits
-=======
+-------
 ``dataknead`` is written by `Hay Kranen <https://haykranen.nl/>`_.
+
+Source
+------
+Source can be found on `Github <https://github.com/hay/dataknead>`_.
 
 License
 -------
