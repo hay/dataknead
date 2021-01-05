@@ -1,0 +1,456 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <meta name="generator" content="sphinx-3.4.2, furo 2020.12.30.beta24"/>
+        <title>dataknead.knead - dataknead</title>
+      <link rel="stylesheet" href="../../_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+    <link rel="stylesheet" href="../../_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../../_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" href="../../_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script defer="defer" src="../../_static/jquery.js"></script>
+    <script defer="defer" src="../../_static/underscore.js"></script>
+    <script defer="defer" src="../../_static/doctools.js"></script>
+    <script defer="defer" src="../../_static/clipboard.min.js"></script>
+    <script defer="defer" src="../../_static/copybutton.js"></script>
+    <script defer src="../../_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">dataknead</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/dataknead-logo.svg" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">dataknead</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command line utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extending.html">Extending dataknead</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev-info.html">Development information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-history.html">Release history</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/hay/dataknead">Source on Github</a></li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <h1>Source code for dataknead.knead</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">.loaders.csv</span> <span class="kn">import</span> <span class="n">CsvLoader</span>
+<span class="kn">from</span> <span class="nn">.loaders.excel</span> <span class="kn">import</span> <span class="n">ExcelLoader</span>
+<span class="kn">from</span> <span class="nn">.loaders.json</span> <span class="kn">import</span> <span class="n">JsonLoader</span>
+<span class="kn">from</span> <span class="nn">.loaders.text</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="nn">.loaders.toml</span> <span class="kn">import</span> <span class="n">TomlLoader</span>
+<span class="kn">from</span> <span class="nn">.loaders.xml</span> <span class="kn">import</span> <span class="n">XmlLoader</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">DEFAULT_LOADERS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">CsvLoader</span><span class="p">,</span>
+    <span class="n">ExcelLoader</span><span class="p">,</span>
+    <span class="n">JsonLoader</span><span class="p">,</span>
+    <span class="n">TextLoader</span><span class="p">,</span>
+    <span class="n">TomlLoader</span><span class="p">,</span>
+    <span class="n">XmlLoader</span>
+<span class="p">]</span>
+
+<span class="c1"># FIXME: this can be done more elegant</span>
+<span class="k">def</span> <span class="nf">add_loader</span><span class="p">(</span><span class="n">loaders</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+    <span class="n">extensions</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">EXTENSIONS</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Adding loader </span><span class="si">{</span><span class="n">loader</span><span class="si">}</span><span class="s2"> for extensions </span><span class="si">{</span><span class="n">extensions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="n">loaders</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LoaderError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"There is already a loader for extension '</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loaders</span><span class="p">[</span><span class="n">extension</span><span class="p">]</span> <span class="o">=</span> <span class="n">loader</span>
+
+    <span class="k">return</span> <span class="n">loaders</span>
+
+<span class="k">class</span> <span class="nc">KneadException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">LoaderError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="Knead"><a class="viewcode-back" href="../../api.html#dataknead.Knead">[docs]</a><span class="k">class</span> <span class="nc">Knead</span><span class="p">:</span>
+    <span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_loaders</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">loader</span> <span class="ow">in</span> <span class="n">DEFAULT_LOADERS</span><span class="p">:</span>
+        <span class="n">add_loader</span><span class="p">(</span><span class="n">_loaders</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Knead.__init__"><a class="viewcode-back" href="../../api.html#dataknead.Knead.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">parse_as</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">read_as</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_data</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Creates a new ``Knead`` instance.</span>
+
+<span class="sd">        By default it is assumed that ``inp`` is a path to a file if it's a string.</span>
+<span class="sd">        The file extension will be used to determine the correct loader (e.g. ``.csv``</span>
+<span class="sd">        will get the :py:class:`CsvLoader &lt;dataknead.csv.CsvLoader&gt;`).</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv")</span>
+
+<span class="sd">        If ``inp`` is not a string it is assumed to be a data structure (e.g. a list or dict).</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead([1, 2, 3])</span>
+
+<span class="sd">        ``parse_as`` is used when you're feeding ``Knead`` a string that is not a file</span>
+<span class="sd">        path, like the results of a HTTP call. In that case you need to specify the</span>
+<span class="sd">        loader yourself as a file extension (e.g. ``csv``, ``json``, etc.)</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            json = "[1,2,3]"</span>
+<span class="sd">            Knead(json, parse_as = "json")</span>
+
+<span class="sd">        ``read_as`` is used when you're giving a path to a file that doesn't have a</span>
+<span class="sd">        valid extension, and doesn't have an extension at all. The same mechanism as ``parse_as``</span>
+<span class="sd">        is at work here: give it a file extension.</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("query", read_as = "csv")</span>
+
+<span class="sd">        ``is_data`` is used if you want to feed ``Knead`` a string as data, and it shouldn't</span>
+<span class="sd">        be parsed at all</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("a line of text", is_data = True)</span>
+
+<span class="sd">        Any additional parameters will be passed on to the loader</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv", has_header = True)</span>
+<span class="sd">        """</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Input: </span><span class="si">{</span><span class="n">inp</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">parse_as</span><span class="p">:</span>
+            <span class="c1"># Process string like file</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Input needs to be string, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+            <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_loader</span><span class="p">(</span><span class="n">parse_as</span><span class="p">)</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_data</span><span class="p">:</span>
+            <span class="c1"># Either a path or a stringified data file</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">read_as</span><span class="p">:</span>
+                <span class="n">read_as</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+            <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_loader</span><span class="p">(</span><span class="n">read_as</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># We assume this is parsed data, assign it</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">inp</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Trying to find loader for extension '</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loaders</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found loader for '</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loaders</span><span class="p">[</span><span class="n">extension</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">KneadException</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Could not find loader for extension '</span><span class="si">{</span><span class="n">extension</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Knead.add_loader"><a class="viewcode-back" href="../../api.html#dataknead.Knead.add_loader">[docs]</a>    <span class="k">def</span> <span class="nf">add_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Adds a custom loader. See :ref:`extending dataknead &lt;extending&gt;`.</span>
+<span class="sd">        """</span>
+        <span class="n">add_loader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaders</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Knead.apply"><a class="viewcode-back" href="../../api.html#dataknead.Knead.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        This applies a function to the loaded data.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Knead.data"><a class="viewcode-back" href="../../api.html#dataknead.Knead.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">check_instance</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Returns the loaded data.</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv").data() # Will return the parsed contents of cities.csv</span>
+
+<span class="sd">        To check if the data is in a specific type use ``check_instance``,</span>
+<span class="sd">        which will raise an exception if it's not correct</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead([1,2,3]).data(check_instance = dict) # Will raise an error, it's a list</span>
+<span class="sd">        """</span>
+        <span class="n">datatype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">check_instance</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">check_instance</span><span class="p">):</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">datatype</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">preftype</span> <span class="o">=</span> <span class="n">check_instance</span><span class="o">.</span><span class="vm">__name__</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data of type </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="s2"> can not be processed, needs to be </span><span class="si">{</span><span class="n">preftype</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span></div>
+
+<div class="viewcode-block" id="Knead.filter"><a class="viewcode-back" href="../../api.html#dataknead.Knead.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Applies a function on every item and removes it if it returns ``False``.</span>
+<span class="sd">        This only works when your data is a ``list``.</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead([1,10,100]).filter(lambda v: v &gt; 9).data() # Returns 10 and 100</span>
+<span class="sd">        """</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">check_instance</span> <span class="o">=</span> <span class="nb">list</span><span class="p">)</span> <span class="k">if</span> <span class="n">fn</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">Knead</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Knead.keys"><a class="viewcode-back" href="../../api.html#dataknead.Knead.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Returns the keys of the internal data</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">Knead</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="Knead.map"><a class="viewcode-back" href="../../api.html#dataknead.Knead.map">[docs]</a>    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iteratee</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Applies a function on every item and replaces it with the return value.</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead([1, 4, 9]).map(lambda x:x * x).data() # [1, 16, 81]</span>
+
+<span class="sd">        If you have a list with dicts, you can give a string to return the</span>
+<span class="sd">        values of a specific key</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv").map("city").write("city-names.csv")</span>
+
+<span class="sd">            # Is the same as</span>
+
+<span class="sd">            Knead("cities.csv").map(lambda c:c["city"]).write("city-names.csv")</span>
+
+<span class="sd">        To return multiple keys with values, you can use a tuple:</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv").map(("city", "country")).write("city-country-names.csv")</span>
+
+<span class="sd">            # Is the same as</span>
+
+<span class="sd">            Knead("cities.csv").map(lambda c:{ "city" : c["city"], "country" : c["country"] }).write("city-country-names.csv")</span>
+
+<span class="sd">            # Or</span>
+
+<span class="sd">            def mapcity(city):</span>
+<span class="sd">                return {</span>
+<span class="sd">                    "city" : city["city"],</span>
+<span class="sd">                    "country" : city["country"]</span>
+<span class="sd">                }</span>
+
+<span class="sd">            Knead("cities.csv").map(mapcity).write("city-country-names.csv")</span>
+<span class="sd">        """</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">check_instance</span> <span class="o">=</span> <span class="nb">list</span><span class="p">)</span>
+
+        <span class="c1"># If 'iteratee' is a function, map over the data</span>
+        <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">iteratee</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">iteratee</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="c1"># Shortcut, like 'pluck'</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iteratee</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">iteratee</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="c1"># Another shortcut, for multiple keys</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iteratee</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="n">key</span><span class="p">:</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">iteratee</span> <span class="p">}</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span> <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Iteratee should be of type dict or function"</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Knead</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Knead.values"><a class="viewcode-back" href="../../api.html#dataknead.Knead.values">[docs]</a>    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Returns the values of the data</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">Knead</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="Knead.write"><a class="viewcode-back" href="../../api.html#dataknead.Knead.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">write_as</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        Writes the data to a file. Type is implied by file extension.</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv").write("cities.json")</span>
+
+<span class="sd">        To force the type to something else, pass the format to `write_as`.</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv").map("city").write("cities.txt", write_as="csv")</span>
+
+<span class="sd">        Any additional parameters will be passed on to the loader:</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            Knead("cities.csv").write("cities.json", indent = 4)</span>
+<span class="sd">            Knead("cities.csv").map("city").write("ciites.csv", fieldnames=["city"])</span>
+<span class="sd">        """</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"write(): </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">write_as</span><span class="p">:</span>
+            <span class="n">write_as</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_loader</span><span class="p">(</span><span class="n">write_as</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">loader</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wrote the data to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span></div></div>
+</pre></div>
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; Hay Kranen
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>

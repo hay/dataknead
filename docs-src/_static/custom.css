@@ -1,0 +1,17 @@
+:root {
+    --hk-blue: #3c57a6;
+    --hk-red: #ee3c24;
+    --hk-green: #6cbd45;
+}
+
+#dataknead h1 {
+    font-weight: bold;
+}
+
+h1, h2 {
+    color: var(--hk-blue);
+}
+
+.sidebar-drawer {
+    border-right: 5px solid var(--hk-blue);
+}

@@ -5,4 +5,4 @@
 __pycache__
 build
 dist
-docs/_build
+docs-src/_build
