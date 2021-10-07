@@ -3,12 +3,12 @@ from enum import Enum
 # This assumes a list with dicts, loop over all dicts, and get the unique
 # keys
 def get_fieldnames(data):
-    fieldnames = set()
+    fieldnames = list()
 
     for item in data:
-        [fieldnames.add(key) for key in item.keys()]
+        [fieldnames.append(key) for key in item.keys()]
 
-    return list(fieldnames)
+    return list(dict.fromkeys(fieldnames))
 
 class SnifferType(Enum):
     list_with_dicts = 1
