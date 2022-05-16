@@ -17,7 +17,7 @@ openpyxl = "^3.0.5"
 
 [tool.poetry.dev-dependencies]
 jq = "^1.1.1"
-PyYAML = "^5.3.1"
+PyYAML = "^5.4"
 
 [tool.poetry.scripts]
 knead = "dataknead.console:run"
